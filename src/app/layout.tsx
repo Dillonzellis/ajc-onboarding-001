@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
+import { SubscriptionProvider } from "@/lib/subscription-context";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -30,7 +31,9 @@ html {
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        <SubscriptionProvider>{children}</SubscriptionProvider>
+      </body>
     </html>
   );
 }

@@ -5,15 +5,16 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Share2, Plus, Volume2, X, Bookmark, Play } from "lucide-react";
 import { useState } from "react";
-import SubscriptionOverlay from "@/components/subcribe-plans/subscription-overlay";
+import { useRouter } from "next/navigation";
 import ProfileOverlay from "@/components/profile-overlay/profile-overlay";
 import Header from "@/components/header/header";
 import SavedOverlay from "@/components/saved-overlay/saved-overlay";
 import Footer from "@/components/footer/footer";
+import { useSubscription } from "@/lib/subscription-context";
 
 export default function StoryPage() {
-  const [showSubscriptionOverlay, setShowSubscriptionOverlay] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const router = useRouter();
+  const { isSubscribed } = useSubscription();
   const [showSavedOverlay, setShowSavedOverlay] = useState(false);
   const [showProfileOverlay, setShowProfileOverlay] = useState(false);
   const [savedStories, setSavedStories] = useState<
@@ -73,6 +74,13 @@ export default function StoryPage() {
     }
   };
 
+  const handleSubscribeClick = () => {
+    // Navigate to subscription page with return URL
+    router.push(
+      `/subscribe?return=${encodeURIComponent(window.location.pathname)}`,
+    );
+  };
+
   const handleRemoveSavedStory = (storyId: string) => {
     setSavedStories((prev) => prev.filter((story) => story.id !== storyId));
     if (storyId === "1") {
@@ -115,15 +123,8 @@ export default function StoryPage() {
         savedStoriesCount={savedStories.length}
         onProfileClick={() => setShowProfileOverlay(true)}
         onSavedClick={() => setShowSavedOverlay(true)}
-        onSubscribeClick={() => setShowSubscriptionOverlay(true)}
+        onSubscribeClick={handleSubscribeClick} // Updated to use the new function
       />
-      {showSubscriptionOverlay && (
-        <SubscriptionOverlay
-          isOpen={showSubscriptionOverlay}
-          onClose={() => setShowSubscriptionOverlay(false)}
-          onSubscribe={() => setIsSubscribed(true)}
-        />
-      )}
 
       {showProfileOverlay && (
         <ProfileOverlay
