@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { X, Search, Bookmark, UserPlus } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface Story {
   id: string;
@@ -37,7 +37,7 @@ interface SavedOverlayProps {
   onUnfollowJournalist: (journalistId: string) => void;
 }
 
-export function SavedOverlay({
+export default function SavedOverlay({
   isOpen,
   savedTab,
   savedStories,
@@ -57,7 +57,7 @@ export function SavedOverlay({
       <div className="min-h-screen">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between md:max-w-4xl md:mx-auto">
             <h1 className="text-2xl font-bold text-gray-900">Saved</h1>
             <Button
               variant="ghost"
@@ -69,12 +69,12 @@ export function SavedOverlay({
             </Button>
           </div>
 
-          <div className="flex space-x-8 mt-4">
+          <div className="flex space-x-8 mt-4 md:max-w-4xl md:mx-auto">
             <button
               onClick={() => onTabChange("articles")}
               className={`pb-2 text-sm font-medium border-b-2 transition-colors ${
                 savedTab === "articles"
-                  ? "border-blue-600 text-blue-600"
+                  ? "border-[#004FFF] text-[#004FFF]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -84,7 +84,7 @@ export function SavedOverlay({
               onClick={() => onTabChange("journalists")}
               className={`pb-2 text-sm font-medium border-b-2 transition-colors ${
                 savedTab === "journalists"
-                  ? "border-blue-600 text-blue-600"
+                  ? "border-[#004FFF] text-[#004FFF]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
               }`}
             >
@@ -106,7 +106,7 @@ export function SavedOverlay({
                       placeholder="Search saved articles..."
                       value={searchQuery}
                       onChange={(e) => onSearchChange(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#004FFF] focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -123,9 +123,11 @@ export function SavedOverlay({
                   <p className="text-gray-600 mb-6">
                     {savedStories.length === 0
                       ? "Stories you save will appear here for easy access later."
-                      : "Try adjusting your search terms to find what you're looking for."}
+                      : "Try adjusting your search terms to find what you&apos;re looking for."}
                   </p>
-                  <Button onClick={onClose}>Continue Reading</Button>
+                  <Button onClick={onClose}>
+                    Continue Reading
+                  </Button>
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -196,9 +198,12 @@ export function SavedOverlay({
                     No journalists followed yet
                   </h2>
                   <p className="text-gray-600 mb-6">
-                    Follow journalists to stay updated with their latest stories.
+                    Follow journalists to stay updated with their latest
+                    stories.
                   </p>
-                  <Button onClick={onClose}>Continue Reading</Button>
+                  <Button onClick={onClose}>
+                    Continue Reading
+                  </Button>
                 </div>
               ) : (
                 <div className="space-y-6">

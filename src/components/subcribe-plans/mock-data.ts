@@ -1,0 +1,48 @@
+export const subscriptionPlans = [
+  {
+    id: "digital",
+    name: "Digital Access",
+    price: "$1",
+    period: "for first 6 months, then $9.99/month",
+    originalPrice: "$9.99/month",
+    savings: "Save 90% for 6 months",
+    features: [
+      "Unlimited access to AJC.com",
+      "Premium newsletters",
+      "Mobile app access",
+      "Ad-free reading experience",
+    ],
+    popular: true,
+  },
+  {
+    id: "premium",
+    name: "Premium Digital",
+    price: "$2",
+    period: "for first 6 months, then $14.99/month",
+    originalPrice: "$14.99/month",
+    savings: "Save 87% for 6 months",
+    features: [
+      "Everything in Digital Access",
+      "Exclusive subscriber content",
+      "Premium podcasts",
+      "Early access to breaking news",
+      "Digital replica of print edition",
+    ],
+    popular: false,
+  },
+  {
+    id: "print-digital",
+    name: "Print + Digital",
+    price: "$3",
+    period: "for first 6 months, then $19.99/month",
+    originalPrice: "$19.99/month",
+    savings: "Save 85% for 6 months",
+    features: [
+      "Everything in Premium Digital",
+      "Sunday print delivery",
+      "Exclusive subscriber events",
+      "Premium customer support",
+    ],
+    popular: false,
+  },
+];

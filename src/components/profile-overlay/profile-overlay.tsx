@@ -1,21 +1,29 @@
 "use client";
 
+import {
+  Bell,
+  BookOpen,
+  Camera,
+  Clock,
+  Mail,
+  Settings,
+  User,
+  X,
+} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { X, User, Settings, Bell, BookOpen, Mail, Clock, Camera } from "lucide-react";
-
 interface ProfileOverlayProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
-  if (!isOpen) return null;
+export default function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
 
   return (
     <div className="fixed inset-0 bg-white z-[100] overflow-y-auto">
       <div className="p-6">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8 md:max-w-4xl md:mx-auto">
           <h2 className="text-3xl font-bold text-gray-900">Hello Jason!</h2>
           <button
             onClick={onClose}
@@ -37,7 +45,7 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
 
             <div className="flex items-center mb-6">
               <div className="relative">
-                <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-20 h-20 bg-[#004FFF] rounded-full flex items-center justify-center text-white text-2xl font-bold">
                   J
                 </div>
                 <button className="absolute -bottom-1 -right-1 bg-white border border-gray-300 rounded-full p-1 hover:bg-gray-50">
@@ -63,13 +71,13 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Name
                 </label>
-                <p className="text-gray-900">Jason Smith</p>
+                <p className="text-gray-900">Jason Foust</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
-                <p className="text-gray-900">jason.smith@email.com</p>
+                <p className="text-gray-900">jason.foust@ajc.com</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -83,16 +91,16 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
               <h4 className="text-lg font-semibold text-gray-900 mb-4">
                 Subscription Details
               </h4>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <div className="bg-blue-50 border border-[#004FFF] rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-blue-900">
+                    <p className="font-semibold text-[#004FFF]">
                       Premium Digital Plan
                     </p>
-                    <p className="text-sm text-blue-700">
+                    <p className="text-sm text-[#004FFF]">
                       $9.99/month • Renews January 15, 2025
                     </p>
-                    <p className="text-sm text-blue-600 mt-1">
+                    <p className="text-sm text-[#004FFF] mt-1">
                       Unlimited access to all AJC content
                     </p>
                   </div>
@@ -113,12 +121,11 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 <Button variant="outline" size="sm">
                   Update Payment
                 </Button>
+                <Button variant="outline" size="sm" className="bg-transparent">
+                  Edit Account Details
+                </Button>
               </div>
             </div>
-
-            <Button variant="outline" className="mt-6 bg-transparent">
-              Edit Account Details
-            </Button>
           </div>
 
           {/* Settings Section */}
@@ -168,6 +175,7 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 Build Your Routine
               </h4>
 
+              {/* Routine Type Selection */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-3">
                   Choose Your Routine
@@ -195,6 +203,7 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 </div>
               </div>
 
+              {/* Podcast Preferences */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-3">
                   Podcast Preferences
@@ -215,7 +224,118 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 </div>
               </div>
 
-              <Button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white">
+              {/* Quick Updates */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Quick Updates
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {["Weather", "Traffic", "Breaking News", "Sports Scores"].map(
+                    (update) => (
+                      <label key={update} className="flex items-center">
+                        <input type="checkbox" className="mr-2" />
+                        <span className="text-gray-900">{update}</span>
+                      </label>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              {/* Newsletter Subscriptions */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Newsletter Subscriptions
+                </label>
+                <div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {[
+                      "Politically Georgia",
+                      "AJC ePaper Daily",
+                      "Letter from the Editor",
+                      "Today's Top 5",
+                      "A.M. ATLANTA",
+                      "Afternoon Update",
+                      "Breaking News",
+                      "UATL",
+                      "Sports Daily",
+                      "Braves Report",
+                      "Politics",
+                      "Food & Dining",
+                      "Access ATL",
+                      "Aging in Atlanta",
+                      "Evening Update",
+                      "Good Day UGA",
+                      "Jobseekers",
+                      "Pulse Plus",
+                      "Travel",
+                      "Weekend Update",
+                      "AJC Peachtree Road Race",
+                      "Sweet Tea by the AJC",
+                      "Dirty and Birds Dispatch",
+                    ].map((newsletter) => (
+                      <label
+                        key={newsletter}
+                        className="flex items-center py-1"
+                      >
+                        <input type="checkbox" className="mr-2" />
+                        <span className="text-gray-900 text-sm">
+                          {newsletter}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Routine Settings */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium text-gray-900">
+                      Enable Routine Button
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Show routine button on homepage
+                    </p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      defaultChecked
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#004FFF]"></div>
+                  </label>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Timeframe
+                    </label>
+                    <select className="w-full border border-gray-300 rounded-md px-3 py-2">
+                      <option>6:00 AM - 9:00 AM</option>
+                      <option>9:00 AM - 12:00 PM</option>
+                      <option>12:00 PM - 3:00 PM</option>
+                      <option>3:00 PM - 6:00 PM</option>
+                      <option>6:00 PM - 9:00 PM</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Frequency
+                    </label>
+                    <select className="w-full border border-gray-300 rounded-md px-3 py-2">
+                      <option>Daily</option>
+                      <option>Weekdays Only</option>
+                      <option>Weekends Only</option>
+                      <option>Custom</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <Button className="mt-6 bg-[#004FFF] hover:bg-[#003ACC] text-white">
                 Save Routine Preferences
               </Button>
             </div>
@@ -235,7 +355,7 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="bg-blue-50 text-blue-600 border-blue-200"
+                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
                 >
                   Enabled
                 </Button>
@@ -245,7 +365,23 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="bg-blue-50 text-blue-600 border-blue-200"
+                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
+                >
+                  Enabled
+                </Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-900">Sports Updates</span>
+                <Button variant="outline" size="sm">
+                  Disabled
+                </Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-gray-900">Weather Alerts</span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
                 >
                   Enabled
                 </Button>
@@ -264,26 +400,89 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               <Badge
                 variant="secondary"
-                className="bg-blue-50 text-blue-700 border-blue-200 justify-center py-2"
+                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
               >
                 Politics
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-blue-50 text-blue-700 border-blue-200 justify-center py-2"
+                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
               >
                 Local News
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-blue-50 text-blue-700 border-blue-200 justify-center py-2"
+                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
               >
                 Business
+              </Badge>
+              <Badge variant="outline" className="justify-center py-2">
+                Sports
+              </Badge>
+              <Badge variant="outline" className="justify-center py-2">
+                Entertainment
+              </Badge>
+              <Badge
+                variant="secondary"
+                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
+              >
+                Technology
               </Badge>
             </div>
             <Button variant="outline" className="mt-4 bg-transparent">
               Customize Topics
             </Button>
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex items-center mb-4">
+              <Mail className="h-5 w-5 text-gray-600 mr-2" />
+              <h3 className="text-xl font-semibold text-gray-900">
+                Newsletter Subscriptions
+              </h3>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-900">Morning Briefing</p>
+                  <p className="text-sm text-gray-600">
+                    Daily news summary delivered at 7 AM
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="bg-green-50 text-green-600 border-green-200"
+                >
+                  Subscribed
+                </Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-900">
+                    Atlanta Business Weekly
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Weekly business insights and market updates
+                  </p>
+                </div>
+                <Button variant="outline" size="sm">
+                  Subscribe
+                </Button>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-gray-900">Sports Roundup</p>
+                  <p className="text-sm text-gray-600">
+                    Weekly sports highlights and analysis
+                  </p>
+                </div>
+                <Button variant="outline" size="sm">
+                  Subscribe
+                </Button>
+              </div>
+            </div>
           </div>
 
           {/* Reading History Section */}
@@ -296,10 +495,22 @@ export function ProfileOverlay({ isOpen, onClose }: ProfileOverlayProps) {
             </div>
             <div className="space-y-4">
               <div className="border-b border-gray-100 pb-3">
-                <h4 className="font-medium text-gray-900 hover:text-blue-600 cursor-pointer">
+                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
                   Atlanta City Council Approves Major Infrastructure Investment
                 </h4>
                 <p className="text-sm text-gray-600">Read 2 hours ago</p>
+              </div>
+              <div className="border-b border-gray-100 pb-3">
+                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
+                  Georgia Election Results: What You Need to Know
+                </h4>
+                <p className="text-sm text-gray-600">Read yesterday</p>
+              </div>
+              <div className="border-b border-gray-100 pb-3">
+                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
+                  Hawks Trade Rumors Heat Up Before Deadline
+                </h4>
+                <p className="text-sm text-gray-600">Read 2 days ago</p>
               </div>
             </div>
             <Button variant="outline" className="mt-4 bg-transparent">
