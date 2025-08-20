@@ -126,14 +126,14 @@ export function ArticleContent({
               promises to reshape downtown Atlanta over the next decade. The
               ambitious plan addresses long-standing concerns about
               transportation, affordable housing, and green space accessibility
-              in the city's core.
+              in the city&apos;s core.
             </p>
 
             <p className="text-gray-800 leading-relaxed">
-              "This is a transformative moment for our city," said Council
-              President Doug Shipman during the meeting. "We're not just fixing
-              what's broken – we're building the foundation for Atlanta's next
-              chapter of growth and prosperity."
+              &quot;This is a transformative moment for our city,&quot; said Council
+              President Doug Shipman during the meeting. &quot;We&apos;re not just fixing
+              what&apos;s broken – we&apos;re building the foundation for Atlanta&apos;s next
+              chapter of growth and prosperity.&quot;
             </p>
 
             <p className="text-gray-800 leading-relaxed">
@@ -165,7 +165,7 @@ export function ArticleContent({
             </p>
 
             <p className="text-gray-800 leading-relaxed">
-              The remaining $400 million will modernize the city's utility
+              The remaining $400 million will modernize the city&apos;s utility
               infrastructure and expand high-speed broadband access to
               underserved neighborhoods, addressing digital equity concerns that
               became more apparent during the pandemic.

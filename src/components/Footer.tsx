@@ -8,7 +8,7 @@ export function Footer() {
               The Atlanta Journal-Constitution
             </h3>
             <p className="text-gray-400 text-sm">
-              Georgia's most trusted news source since 1868.
+              Georgia&apos;s most trusted news source since 1868.
             </p>
           </div>
           <div>

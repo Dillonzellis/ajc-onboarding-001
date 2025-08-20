@@ -53,7 +53,7 @@ export function SubscriptionOverlay({
                 Choose Your Plan
               </h2>
               <p className="text-gray-600 mt-2">
-                Get unlimited access to Georgia's most trusted news source
+                Get unlimited access to Georgia&apos;s most trusted news source
               </p>
             </div>
             <button
@@ -286,7 +286,7 @@ export function SubscriptionOverlay({
               </div>
               <div className="max-w-lg mx-auto">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                  We're so glad you're here Jason!
+                  We&apos;re so glad you&apos;re here Jason!
                 </h2>
               </div>
 
