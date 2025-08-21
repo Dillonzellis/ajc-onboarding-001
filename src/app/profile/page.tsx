@@ -8,7 +8,6 @@ import {
   Mail,
   Settings,
   User,
-  X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -125,6 +124,17 @@ export default function ProfileOverlay() {
                 </Button>
                 <Button variant="outline" size="sm" className="bg-transparent">
                   Edit Account Details
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-red-600 hover:text-red-700 hover:border-red-300 bg-transparent"
+                  // onClick={() => {
+                  //   setIsSubscribed(false);
+                  //   setShowProfileOverlay(false);
+                  // }}
+                >
+                  Sign Out
                 </Button>
               </div>
             </div>
