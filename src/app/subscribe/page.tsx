@@ -2,12 +2,12 @@
 
 import { X, CreditCard, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { subscriptionPlans } from "@/components/subcribe-plans/mock-data";
 import { useSubscription } from "@/lib/subscription-context";
 
-export default function SubscriptionPage() {
+function SubscriptionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setIsSubscribed, selectedPlan, setSelectedPlan } = useSubscription();
@@ -389,5 +389,27 @@ export default function SubscriptionPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// Loading component for Suspense fallback
+function SubscriptionLoading() {
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-lg text-gray-600">
+          Loading subscription options...
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main export wrapped in Suspense
+export default function SubscriptionPage() {
+  return (
+    <Suspense fallback={<SubscriptionLoading />}>
+      <SubscriptionContent />
+    </Suspense>
   );
 }
