@@ -4,6 +4,7 @@ import type React from "react";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -818,17 +819,12 @@ export default function HomePage() {
                   >
                     Back
                   </button>
-                  <button
-                    onClick={() => {
-                      // Handle completion - could redirect or show success message
-                      alert(
-                        "Personalization complete! Welcome to your customized AJC experience.",
-                      );
-                    }}
+                  <Link
+                    href="/"
                     className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
                   >
                     Finish Setup
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

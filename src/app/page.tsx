@@ -121,7 +121,6 @@ export default function StoryPage() {
       <Header
         isSubscribed={isSubscribed}
         savedStoriesCount={savedStories.length}
-        onProfileClick={() => setShowProfileOverlay(true)}
         onSavedClick={() => setShowSavedOverlay(true)}
         onSubscribeClick={handleSubscribeClick} // Updated to use the new function
       />

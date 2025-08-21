@@ -5,16 +5,21 @@ import { Menu, X, ChevronRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface HeaderProps {
   isSubscribed: boolean;
   savedStoriesCount: number;
-  onProfileClick: () => void;
   onSavedClick: () => void;
   onSubscribeClick: () => void;
 }
 
-export default function Header({ isSubscribed, savedStoriesCount, onProfileClick, onSavedClick, onSubscribeClick }: HeaderProps) {
+export default function Header({
+  isSubscribed,
+  savedStoriesCount,
+  onSavedClick,
+  onSubscribeClick,
+}: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -29,7 +34,9 @@ export default function Header({ isSubscribed, savedStoriesCount, onProfileClick
               >
                 <Menu className="h-6 w-6 text-gray-700" />
               </button>
-              <div className="text-2xl font-bold text-black">AJC</div>
+              <Link href="/" className="text-2xl font-bold text-black">
+                AJC
+              </Link>
             </div>
             <nav className="hidden md:flex space-x-6">
               <a href="#" className="text-gray-700 hover:text-black">
@@ -58,12 +65,12 @@ export default function Header({ isSubscribed, savedStoriesCount, onProfileClick
                   Saved ({savedStoriesCount})
                 </Button>
                 <Button
+                  asChild
                   className="rounded-full bg-transparent"
                   variant="outline"
                   size="sm"
-                  onClick={onProfileClick}
                 >
-                  Profile
+                  <Link href="/profile">Profile</Link>
                 </Button>
               </>
             ) : (
