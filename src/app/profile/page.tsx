@@ -16,6 +16,7 @@ import Header from "@/components/header/header";
 import { useUser } from "@/lib/user-context";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import TopicsOfInterest from "@/components/onboarding/topics-of-interest";
 
 export default function ProfileOverlay() {
   const { user, setSubscription, updateUser } = useUser();
@@ -433,49 +434,7 @@ export default function ProfileOverlay() {
           </div>
 
           {/* Topics of Interest Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <BookOpen className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Topics of Interest
-              </h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Politics
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Local News
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Business
-              </Badge>
-              <Badge variant="outline" className="justify-center py-2">
-                Sports
-              </Badge>
-              <Badge variant="outline" className="justify-center py-2">
-                Entertainment
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Technology
-              </Badge>
-            </div>
-            <Button variant="outline" className="mt-4 bg-transparent">
-              Customize Topics
-            </Button>
-          </div>
+          <TopicsOfInterest />
 
           {/* Newsletter Section */}
           <div className="bg-white border border-gray-200 rounded-lg p-6">

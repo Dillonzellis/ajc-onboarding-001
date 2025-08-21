@@ -109,10 +109,8 @@ export default function HomePage() {
       <div className="p-6" style={{ backgroundColor: "#282828" }}>
         <div className="max-w-4xl mx-auto">
           <div className="relative flex items-center justify-between">
-            {/* Progress line */}
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-600 -translate-y-1/2 z-0"></div>
 
-            {/* Step circles */}
             {[1, 2, 3, 4, 5].map((step) => (
               <div
                 key={step}
@@ -148,7 +146,6 @@ export default function HomePage() {
       <div className="relative z-10">
         {currentStep > 0 && <ProgressBar />}
 
-        {/* Logo and initial text */}
         {currentStep === 0 && (
           <div className="flex flex-col items-center justify-center min-h-screen gap-8">
             <div
@@ -176,7 +173,6 @@ export default function HomePage() {
                     className="object-contain"
                   />
                 </div>
-                {/* Let's get started button */}
                 <button
                   onClick={handleGetStarted}
                   className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors mt-4"
@@ -249,7 +245,6 @@ export default function HomePage() {
 
                 {hoveredNewsletter && (
                   <div className="fixed z-20 pointer-events-none">
-                    {/* Mobile positioning - top center below progress bar */}
                     <div className="sm:hidden fixed top-32 left-1/2 transform -translate-x-1/2 w-4/5">
                       <div className="bg-black/40 backdrop-blur-md text-white p-4 rounded-lg shadow-lg border border-gray-500/30">
                         <h4 className="font-semibold text-sm mb-2">
@@ -261,7 +256,6 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    {/* Desktop positioning - lower left corner */}
                     <div className="hidden sm:block fixed bottom-8 left-8 max-w-sm">
                       <div className="bg-black/40 backdrop-blur-md text-white p-4 rounded-lg shadow-lg border border-gray-500/30">
                         <h4 className="font-semibold text-sm mb-2">
