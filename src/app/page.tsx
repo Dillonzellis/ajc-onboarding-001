@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Share2, Plus, Volume2, X, Bookmark, Play } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import ProfileOverlay from "@/components/profile-overlay/profile-overlay";
 import Header from "@/components/header/header";
 import SavedOverlay from "@/components/saved-overlay/saved-overlay";
 import Footer from "@/components/footer/footer";
@@ -16,7 +15,6 @@ export default function StoryPage() {
   const router = useRouter();
   const { isSubscribed } = useSubscription();
   const [showSavedOverlay, setShowSavedOverlay] = useState(false);
-  const [showProfileOverlay, setShowProfileOverlay] = useState(false);
   const [savedStories, setSavedStories] = useState<
     Array<{
       id: string;
@@ -124,13 +122,6 @@ export default function StoryPage() {
         onSavedClick={() => setShowSavedOverlay(true)}
         onSubscribeClick={handleSubscribeClick} // Updated to use the new function
       />
-
-      {showProfileOverlay && (
-        <ProfileOverlay
-          isOpen={showProfileOverlay}
-          onClose={() => setShowProfileOverlay(false)}
-        />
-      )}
 
       {showSavedOverlay && (
         <SavedOverlay
