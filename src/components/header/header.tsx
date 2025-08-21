@@ -1,28 +1,24 @@
 "use client";
 
 import { Menu, X, ChevronRight, Search } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-
 import { useState } from "react";
 import Link from "next/link";
-import { useSubscription } from "@/lib/subscription-context";
+import { useUser } from "@/lib/user-context";
 
 interface HeaderProps {
-  isSubscribed: boolean;
   savedStoriesCount: number;
   onSavedClick: () => void;
   onSubscribeClick: () => void;
 }
 
 export default function Header({
-  isSubscribed,
   savedStoriesCount,
   onSavedClick,
   onSubscribeClick,
 }: HeaderProps) {
+  const { user, setSubscription } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setIsSubscribed } = useSubscription();
 
   return (
     <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
@@ -56,7 +52,7 @@ export default function Header({
             </nav>
           </div>
           <div className="flex items-center space-x-4">
-            {isSubscribed ? (
+            {user.subscription.isActive ? (
               <>
                 <Button
                   className="rounded-full bg-transparent"
@@ -81,7 +77,7 @@ export default function Header({
                   className="rounded-full border-slate-200 border bg-transparent"
                   variant="outline"
                   size="sm"
-                  onClick={() => setIsSubscribed(true)}
+                  onClick={() => setSubscription(true)}
                 >
                   Sign In
                 </Button>

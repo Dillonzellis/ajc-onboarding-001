@@ -5,16 +5,17 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { subscriptionPlans } from "@/components/subcribe-plans/mock-data";
-import { useSubscription } from "@/lib/subscription-context";
+import { useUser } from "@/lib/user-context";
 
 function SubscriptionContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setIsSubscribed, selectedPlan, setSelectedPlan } = useSubscription();
+  const { setSubscription } = useUser();
 
   const [subscriptionStep, setSubscriptionStep] = useState<
     "plans" | "form" | "completion"
   >("plans");
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [showCompletionOptions, setShowCompletionOptions] = useState(false);
 
   // Get the return URL from query params, default to home
@@ -30,7 +31,7 @@ function SubscriptionContent() {
     if (plan) {
       setSelectedPlan(plan);
     }
-  }, [searchParams, setSelectedPlan]);
+  }, [searchParams]);
 
   const handleCompleteSubscription = () => {
     setSubscriptionStep("completion");
@@ -44,12 +45,18 @@ function SubscriptionContent() {
   };
 
   const handleContinueReading = () => {
-    setIsSubscribed(true);
+    const planName =
+      subscriptionPlans.find((p) => p.id === selectedPlan)?.name ||
+      "Premium Digital Plan";
+    setSubscription(true, planName);
     router.push(returnUrl);
   };
 
   const handleSetupExperience = () => {
-    setIsSubscribed(true);
+    const planName =
+      subscriptionPlans.find((p) => p.id === selectedPlan)?.name ||
+      "Premium Digital Plan";
+    setSubscription(true, planName);
     router.push("/onboarding");
   };
 

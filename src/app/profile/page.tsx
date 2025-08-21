@@ -13,25 +13,42 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/header/header";
-import { useSubscription } from "@/lib/subscription-context";
+import { useUser } from "@/lib/user-context";
 import { useRouter } from "next/navigation";
 
 export default function ProfileOverlay() {
-  const { setIsSubscribed } = useSubscription();
+  const { user, setSubscription, updateUser } = useUser();
   const router = useRouter();
 
   const handleSignOut = () => {
-    setIsSubscribed(false);
+    setSubscription(false);
     router.push("/");
+  };
+
+  const handleThemeToggle = () => {
+    updateUser({
+      preferences: {
+        ...user.preferences,
+        theme: user.preferences.theme === "light" ? "dark" : "light",
+      },
+    });
+  };
+
+  const handleNotificationToggle = () => {
+    updateUser({
+      preferences: {
+        ...user.preferences,
+        notifications: !user.preferences.notifications,
+      },
+    });
   };
 
   return (
     <div className="bg-white">
       <Header
-        isSubscribed
         onSavedClick={() => {}}
         onSubscribeClick={() => {}}
-        savedStoriesCount={0}
+        savedStoriesCount={user.savedStories.length}
       />
       <div className="p-6">
         <div className="flex justify-between items-center mb-8 md:max-w-4xl md:mx-auto">
@@ -102,26 +119,32 @@ export default function ProfileOverlay() {
               <h4 className="text-lg font-semibold text-gray-900 mb-4">
                 Subscription Details
               </h4>
-              <div className="bg-blue-50 border border-[#004FFF] rounded-lg p-4 mb-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-[#004FFF]">
-                      Premium Digital Plan
-                    </p>
-                    <p className="text-sm text-[#004FFF]">
-                      $9.99/month • Renews January 15, 2025
-                    </p>
-                    <p className="text-sm text-[#004FFF] mt-1">
-                      Unlimited access to all AJC content
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Active
-                    </span>
+              {user.subscription.isActive ? (
+                <div className="bg-blue-50 border border-[#004FFF] rounded-lg p-4 mb-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-[#004FFF]">
+                        {user.subscription.plan || "Premium Digital Plan"}
+                      </p>
+                      <p className="text-sm text-[#004FFF]">
+                        $9.99/month • Renews {user.subscription.renewalDate || "January 15, 2025"}
+                      </p>
+                      <p className="text-sm text-[#004FFF] mt-1">
+                        Unlimited access to all AJC content
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        Active
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                  <p className="text-gray-600">No active subscription</p>
+                </div>
+              )}
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm">
                   Manage Subscription
@@ -157,9 +180,9 @@ export default function ProfileOverlay() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-gray-900">Dark Mode</p>
-                  <p className="text-sm text-gray-600">Switch to dark theme</p>
+                  <p className="text-sm text-gray-600">Currently: {user.preferences.theme}</p>
                 </div>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleThemeToggle}>
                   Toggle
                 </Button>
               </div>
@@ -169,11 +192,11 @@ export default function ProfileOverlay() {
                     Email Notifications
                   </p>
                   <p className="text-sm text-gray-600">
-                    Receive breaking news alerts
+                    {user.preferences.notifications ? "Enabled" : "Disabled"}
                   </p>
                 </div>
-                <Button variant="outline" size="sm">
-                  Manage
+                <Button variant="outline" size="sm" onClick={handleNotificationToggle}>
+                  {user.preferences.notifications ? "Disable" : "Enable"}
                 </Button>
               </div>
               <div className="flex items-center justify-between">

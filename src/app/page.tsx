@@ -9,11 +9,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/header/header";
 import SavedOverlay from "@/components/saved-overlay/saved-overlay";
 import Footer from "@/components/footer/footer";
-import { useSubscription } from "@/lib/subscription-context";
-
 export default function StoryPage() {
   const router = useRouter();
-  const { isSubscribed } = useSubscription();
   const [showSavedOverlay, setShowSavedOverlay] = useState(false);
   const [savedStories, setSavedStories] = useState<
     Array<{
@@ -117,10 +114,9 @@ export default function StoryPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header
-        isSubscribed={isSubscribed}
         savedStoriesCount={savedStories.length}
         onSavedClick={() => setShowSavedOverlay(true)}
-        onSubscribeClick={handleSubscribeClick} // Updated to use the new function
+        onSubscribeClick={handleSubscribeClick}
       />
 
       {showSavedOverlay && (
@@ -219,23 +215,23 @@ export default function StoryPage() {
             </div>
 
             <div className="flex items-center space-x-4 py-4 border-b border-gray-200">
-              {isSubscribed && (
-                <Button
-                  variant={isCurrentStorySaved ? "default" : "outline"}
-                  size="sm"
-                  onClick={handleSaveStory}
-                  className={
-                    isCurrentStorySaved
-                      ? "bg-[#004FFF] hover:bg-[#003ACC] text-white"
-                      : ""
-                  }
-                >
-                  <Bookmark
-                    className={`h-4 w-4 mr-2 ${isCurrentStorySaved ? "fill-current" : ""}`}
-                  />
-                  {isCurrentStorySaved ? "Saved" : "Save"}
-                </Button>
-              )}
+              {/* {isSubscribed && ( */}
+              {/*   <Button */}
+              {/*     variant={isCurrentStorySaved ? "default" : "outline"} */}
+              {/*     size="sm" */}
+              {/*     onClick={handleSaveStory} */}
+              {/*     className={ */}
+              {/*       isCurrentStorySaved */}
+              {/*         ? "bg-[#004FFF] hover:bg-[#003ACC] text-white" */}
+              {/*         : "" */}
+              {/*     } */}
+              {/*   > */}
+              {/*     <Bookmark */}
+              {/*       className={`h-4 w-4 mr-2 ${isCurrentStorySaved ? "fill-current" : ""}`} */}
+              {/*     /> */}
+              {/*     {isCurrentStorySaved ? "Saved" : "Save"} */}
+              {/*   </Button> */}
+              {/* )} */}
               <Button
                 className="rounded-full bg-transparent"
                 variant="outline"
@@ -389,7 +385,6 @@ export default function StoryPage() {
           </div>
         </article>
       </main>
-
       <Footer />
     </div>
   );
