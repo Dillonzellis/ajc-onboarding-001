@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/header/header";
 import { useUser } from "@/lib/user-context";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ProfileOverlay() {
   const { user, setSubscription, updateUser } = useUser();
@@ -53,16 +54,9 @@ export default function ProfileOverlay() {
       <div className="p-6">
         <div className="flex justify-between items-center mb-8 md:max-w-4xl md:mx-auto">
           <h2 className="text-3xl font-bold text-gray-900">Hello Jason!</h2>
-          {/* <button */}
-          {/*   onClick={onClose} */}
-          {/*   className="p-2 hover:bg-gray-100 rounded-full" */}
-          {/* > */}
-          {/*   <X className="h-6 w-6 text-gray-500" /> */}
-          {/* </button> */}
         </div>
 
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Account Information Section */}
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <div className="flex items-center mb-4">
               <User className="h-5 w-5 text-gray-600 mr-2" />
@@ -127,7 +121,8 @@ export default function ProfileOverlay() {
                         {user.subscription.plan || "Premium Digital Plan"}
                       </p>
                       <p className="text-sm text-[#004FFF]">
-                        $9.99/month • Renews {user.subscription.renewalDate || "January 15, 2025"}
+                        $9.99/month • Renews{" "}
+                        {user.subscription.renewalDate || "January 15, 2025"}
                       </p>
                       <p className="text-sm text-[#004FFF] mt-1">
                         Unlimited access to all AJC content
@@ -146,8 +141,8 @@ export default function ProfileOverlay() {
                 </div>
               )}
               <div className="flex flex-wrap gap-2">
-                <Button variant="outline" size="sm">
-                  Manage Subscription
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/onboarding">Manage Subscription</Link>
                 </Button>
                 <Button variant="outline" size="sm">
                   Billing History
@@ -180,7 +175,9 @@ export default function ProfileOverlay() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-gray-900">Dark Mode</p>
-                  <p className="text-sm text-gray-600">Currently: {user.preferences.theme}</p>
+                  <p className="text-sm text-gray-600">
+                    Currently: {user.preferences.theme}
+                  </p>
                 </div>
                 <Button variant="outline" size="sm" onClick={handleThemeToggle}>
                   Toggle
@@ -195,7 +192,11 @@ export default function ProfileOverlay() {
                     {user.preferences.notifications ? "Enabled" : "Disabled"}
                   </p>
                 </div>
-                <Button variant="outline" size="sm" onClick={handleNotificationToggle}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleNotificationToggle}
+                >
                   {user.preferences.notifications ? "Disable" : "Enable"}
                 </Button>
               </div>
