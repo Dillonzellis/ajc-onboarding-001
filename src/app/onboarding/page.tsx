@@ -5,22 +5,18 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUser } from "@/lib/user-context";
 
 export default function HomePage() {
+  const { user, updateOnboarding, completeOnboarding } = useUser();
   const [isVisible, setIsVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [contentVisible, setContentVisible] = useState(false);
-  const [selectedNewsletters, setSelectedNewsletters] = useState<string[]>([]);
-  const [wantsDunwoodyNews, setWantsDunwoodyNews] = useState<boolean | null>(
-    null,
-  );
-  const [selectedNeighborhoods, setSelectedNeighborhoods] = useState<string[]>(
-    [],
-  );
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [hoveredNewsletter, setHoveredNewsletter] = useState<string | null>(
     null,
   );
+
+  const { selectedNewsletters, selectedNeighborhoods, selectedTopics } = user.onboarding;
 
   const newsletterDescriptions: { [key: string]: string } = {
     "Subscriber-Only Events":
@@ -155,25 +151,24 @@ export default function HomePage() {
   }, [currentStep]);
 
   const toggleNewsletter = (newsletter: string) => {
-    setSelectedNewsletters((prev) =>
-      prev.includes(newsletter)
-        ? prev.filter((n) => n !== newsletter)
-        : [...prev, newsletter],
-    );
+    const newNewsletters = selectedNewsletters.includes(newsletter)
+      ? selectedNewsletters.filter((n) => n !== newsletter)
+      : [...selectedNewsletters, newsletter];
+    updateOnboarding({ selectedNewsletters: newNewsletters });
   };
 
   const toggleNeighborhood = (neighborhood: string) => {
-    setSelectedNeighborhoods((prev) =>
-      prev.includes(neighborhood)
-        ? prev.filter((n) => n !== neighborhood)
-        : [...prev, neighborhood],
-    );
+    const newNeighborhoods = selectedNeighborhoods.includes(neighborhood)
+      ? selectedNeighborhoods.filter((n) => n !== neighborhood)
+      : [...selectedNeighborhoods, neighborhood];
+    updateOnboarding({ selectedNeighborhoods: newNeighborhoods });
   };
 
   const toggleTopic = (topic: string) => {
-    setSelectedTopics((prev) =>
-      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic],
-    );
+    const newTopics = selectedTopics.includes(topic)
+      ? selectedTopics.filter((t) => t !== topic)
+      : [...selectedTopics, topic];
+    updateOnboarding({ selectedTopics: newTopics });
   };
 
   const handleGetStarted = () => {
@@ -194,15 +189,15 @@ export default function HomePage() {
   };
 
   const removeNewsletter = (newsletter: string) => {
-    setSelectedNewsletters((prev) => prev.filter((n) => n !== newsletter));
+    updateOnboarding({ selectedNewsletters: selectedNewsletters.filter((n) => n !== newsletter) });
   };
 
   const removeNeighborhood = (neighborhood: string) => {
-    setSelectedNeighborhoods((prev) => prev.filter((n) => n !== neighborhood));
+    updateOnboarding({ selectedNeighborhoods: selectedNeighborhoods.filter((n) => n !== neighborhood) });
   };
 
   const removeTopic = (topic: string) => {
-    setSelectedTopics((prev) => prev.filter((t) => t !== topic));
+    updateOnboarding({ selectedTopics: selectedTopics.filter((t) => t !== topic) });
   };
 
   const goToStep = (step: number) => {
@@ -442,9 +437,9 @@ export default function HomePage() {
               {/* Yes/No selection */}
               <div className="flex justify-center gap-6 mb-16">
                 <button
-                  onClick={() => setWantsDunwoodyNews(true)}
+                  onClick={() => toggleNeighborhood("Dunwoody")}
                   className={`px-8 py-3 rounded-full font-semibold transition-colors ${
-                    wantsDunwoodyNews === true
+                    selectedNeighborhoods.includes("Dunwoody")
                       ? "bg-white text-gray-800"
                       : "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-800"
                   }`}
@@ -452,9 +447,12 @@ export default function HomePage() {
                   Yes
                 </button>
                 <button
-                  onClick={() => setWantsDunwoodyNews(false)}
+                  onClick={() => {
+                    const newNeighborhoods = selectedNeighborhoods.filter(n => n !== "Dunwoody");
+                    updateOnboarding({ selectedNeighborhoods: newNeighborhoods });
+                  }}
                   className={`px-8 py-3 rounded-full font-semibold transition-colors ${
-                    wantsDunwoodyNews === false
+                    !selectedNeighborhoods.includes("Dunwoody")
                       ? "bg-white text-gray-800"
                       : "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-800"
                   }`}
@@ -735,10 +733,7 @@ export default function HomePage() {
                   <div className="bg-black/20 backdrop-blur-md rounded-lg p-6 border border-gray-500/30">
                     <div className="flex justify-between items-center mb-4">
                       <h3 className="text-white text-xl font-semibold">
-                        Neighborhoods (
-                        {selectedNeighborhoods.length +
-                          (wantsDunwoodyNews ? 1 : 0)}
-                        )
+                        Neighborhoods ({selectedNeighborhoods.length})
                       </h3>
                       <button
                         onClick={() => goToStep(2)}
@@ -748,17 +743,12 @@ export default function HomePage() {
                       </button>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {wantsDunwoodyNews && (
-                        <div className="bg-white/10 text-white px-3 py-1 rounded-full text-sm">
-                          Dunwoody (Your Area)
-                        </div>
-                      )}
                       {selectedNeighborhoods.map((neighborhood) => (
                         <div
                           key={neighborhood}
                           className="bg-white/10 text-white px-3 py-1 rounded-full text-sm flex items-center gap-2"
                         >
-                          <span>{neighborhood}</span>
+                          <span>{neighborhood}{neighborhood === "Dunwoody" ? " (Your Area)" : ""}</span>
                           <button
                             onClick={() => removeNeighborhood(neighborhood)}
                             className="text-red-400 hover:text-red-300 ml-1"
@@ -767,12 +757,11 @@ export default function HomePage() {
                           </button>
                         </div>
                       ))}
-                      {selectedNeighborhoods.length === 0 &&
-                        !wantsDunwoodyNews && (
-                          <p className="text-gray-400">
-                            No neighborhoods selected
-                          </p>
-                        )}
+                      {selectedNeighborhoods.length === 0 && (
+                        <p className="text-gray-400">
+                          No neighborhoods selected
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -821,6 +810,7 @@ export default function HomePage() {
                   </button>
                   <Link
                     href="/"
+                    onClick={completeOnboarding}
                     className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
                   >
                     Finish Setup

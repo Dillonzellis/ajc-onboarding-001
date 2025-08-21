@@ -9,10 +9,15 @@ interface User {
     renewalDate?: string;
   };
   savedStories: string[];
-  topics: string[];
   preferences: {
     theme: "light" | "dark";
     notifications: boolean;
+  };
+  onboarding: {
+    isCompleted: boolean;
+    selectedNewsletters: string[];
+    selectedNeighborhoods: string[];
+    selectedTopics: string[];
   };
 }
 
@@ -21,13 +26,15 @@ interface UserContextType {
   updateUser: (updates: Partial<User>) => void;
   addSavedStory: (storyId: string) => void;
   removeSavedStory: (storyId: string) => void;
-  addTopic: (topic: string) => void;
-  removeTopic: (topic: string) => void;
+  // addTopic: (topic: string) => void;
+  // removeTopic: (topic: string) => void;
   setSubscription: (
     isActive: boolean,
     plan?: string,
     renewalDate?: string,
   ) => void;
+  updateOnboarding: (onboardingData: Partial<User["onboarding"]>) => void;
+  completeOnboarding: () => void;
 }
 
 const defaultUser: User = {
@@ -36,10 +43,15 @@ const defaultUser: User = {
     plan: "",
   },
   savedStories: [],
-  topics: [],
   preferences: {
     theme: "light",
     notifications: true,
+  },
+  onboarding: {
+    isCompleted: false,
+    selectedNewsletters: [],
+    selectedNeighborhoods: [],
+    selectedTopics: [],
   },
 };
 
@@ -83,19 +95,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
-  const addTopic = (topic: string) => {
-    setUser((prev) => ({
-      ...prev,
-      topics: [...prev.topics, topic],
-    }));
-  };
-
-  const removeTopic = (topic: string) => {
-    setUser((prev) => ({
-      ...prev,
-      topics: prev.topics.filter((t) => t !== topic),
-    }));
-  };
+  // const addTopic = (topic: string) => {
+  //   setUser((prev) => ({
+  //     ...prev,
+  //     topics: [...prev.topics, topic],
+  //   }));
+  // };
+  //
+  // const removeTopic = (topic: string) => {
+  //   setUser((prev) => ({
+  //     ...prev,
+  //     topics: prev.topics.filter((t) => t !== topic),
+  //   }));
+  // };
 
   const setSubscription = (
     isActive: boolean,
@@ -112,6 +124,26 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  const updateOnboarding = (onboardingData: Partial<User["onboarding"]>) => {
+    setUser((prev) => ({
+      ...prev,
+      onboarding: {
+        ...prev.onboarding,
+        ...onboardingData,
+      },
+    }));
+  };
+
+  const completeOnboarding = () => {
+    setUser((prev) => ({
+      ...prev,
+      onboarding: {
+        ...prev.onboarding,
+        isCompleted: true,
+      },
+    }));
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -119,9 +151,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         updateUser,
         addSavedStory,
         removeSavedStory,
-        addTopic,
-        removeTopic,
+        // addTopic,
+        // removeTopic,
         setSubscription,
+        updateOnboarding,
+        completeOnboarding,
       }}
     >
       {children}
