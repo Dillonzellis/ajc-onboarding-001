@@ -53,12 +53,6 @@ export default function ProfileOverlay() {
       <div className="p-6">
         <div className="flex justify-between items-center mb-8 md:max-w-4xl md:mx-auto">
           <h2 className="text-3xl font-bold text-gray-900">Hello Jason!</h2>
-          {/* <button */}
-          {/*   onClick={onClose} */}
-          {/*   className="p-2 hover:bg-gray-100 rounded-full" */}
-          {/* > */}
-          {/*   <X className="h-6 w-6 text-gray-500" /> */}
-          {/* </button> */}
         </div>
 
         <div className="max-w-4xl mx-auto space-y-8">
@@ -170,13 +164,73 @@ export default function ProfileOverlay() {
             </div>
           </div>
 
+          {/* Personalization Preferences */}
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex items-center mb-4">
+              <BookOpen className="h-5 w-5 text-gray-600 mr-2" />
+              <h3 className="text-xl font-semibold text-gray-900">Your Preferences</h3>
+            </div>
+            
+            {/* Newsletters */}
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">Newsletters ({user.onboarding.selectedNewsletters.length})</h4>
+              {user.onboarding.selectedNewsletters.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {user.onboarding.selectedNewsletters.map((newsletter) => (
+                    <Badge key={newsletter} variant="secondary" className="bg-blue-50 text-blue-700">
+                      {newsletter}
+                    </Badge>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">No newsletters selected</p>
+              )}
+            </div>
+
+            {/* Neighborhoods */}
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">Neighborhoods ({user.onboarding.selectedNeighborhoods.length})</h4>
+              {user.onboarding.selectedNeighborhoods.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {user.onboarding.selectedNeighborhoods.map((neighborhood) => (
+                    <Badge key={neighborhood} variant="secondary" className="bg-green-50 text-green-700">
+                      {neighborhood}
+                    </Badge>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">No neighborhoods selected</p>
+              )}
+            </div>
+
+            {/* Topics */}
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">Topics of Interest ({user.onboarding.selectedTopics.length})</h4>
+              {user.onboarding.selectedTopics.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {user.onboarding.selectedTopics.map((topic) => (
+                    <Badge key={topic} variant="secondary" className="bg-purple-50 text-purple-700">
+                      {topic}
+                    </Badge>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-600">No topics selected</p>
+              )}
+            </div>
+
+            <Button variant="outline" size="sm" onClick={() => router.push('/onboarding')}>
+              Update Preferences
+            </Button>
+          </div>
+
           {/* Settings Section */}
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <div className="flex items-center mb-4">
               <Settings className="h-5 w-5 text-gray-600 mr-2" />
               <h3 className="text-xl font-semibold text-gray-900">Settings</h3>
             </div>
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="font-medium text-gray-900">Dark Mode</p>
@@ -211,353 +265,6 @@ export default function ProfileOverlay() {
                 </Button>
               </div>
             </div>
-
-            <div className="border-t pt-6">
-              <h4 className="text-lg font-semibold text-gray-900 mb-6">
-                Build Your Routine
-              </h4>
-
-              {/* Routine Type Selection */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Choose Your Routine
-                </label>
-                <div className="flex gap-4">
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="routine"
-                      value="morning"
-                      className="mr-2"
-                      defaultChecked
-                    />
-                    <span className="text-gray-900">Morning Routine</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="routine"
-                      value="afternoon"
-                      className="mr-2"
-                    />
-                    <span className="text-gray-900">Afternoon Routine</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Podcast Preferences */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Podcast Preferences
-                </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {[
-                    "Politically Georgia",
-                    "Breakdown",
-                    "The Voices of King",
-                    "HBCU Journeys",
-                    "The Monica Pearson Show",
-                  ].map((podcast) => (
-                    <label key={podcast} className="flex items-center">
-                      <input type="checkbox" className="mr-2" />
-                      <span className="text-gray-900">{podcast}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Updates */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Quick Updates
-                </label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {["Weather", "Traffic", "Breaking News", "Sports Scores"].map(
-                    (update) => (
-                      <label key={update} className="flex items-center">
-                        <input type="checkbox" className="mr-2" />
-                        <span className="text-gray-900">{update}</span>
-                      </label>
-                    ),
-                  )}
-                </div>
-              </div>
-
-              {/* Newsletter Subscriptions */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Newsletter Subscriptions
-                </label>
-                <div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {[
-                      "Politically Georgia",
-                      "AJC ePaper Daily",
-                      "Letter from the Editor",
-                      "Today's Top 5",
-                      "A.M. ATLANTA",
-                      "Afternoon Update",
-                      "Breaking News",
-                      "UATL",
-                      "Sports Daily",
-                      "Braves Report",
-                      "Politics",
-                      "Food & Dining",
-                      "Access ATL",
-                      "Aging in Atlanta",
-                      "Evening Update",
-                      "Good Day UGA",
-                      "Jobseekers",
-                      "Pulse Plus",
-                      "Travel",
-                      "Weekend Update",
-                      "AJC Peachtree Road Race",
-                      "Sweet Tea by the AJC",
-                      "Dirty and Birds Dispatch",
-                    ].map((newsletter) => (
-                      <label
-                        key={newsletter}
-                        className="flex items-center py-1"
-                      >
-                        <input type="checkbox" className="mr-2" />
-                        <span className="text-gray-900 text-sm">
-                          {newsletter}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Routine Settings */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-gray-900">
-                      Enable Routine Button
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      Show routine button on homepage
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="sr-only peer"
-                      defaultChecked
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#004FFF]"></div>
-                  </label>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Timeframe
-                    </label>
-                    <select className="w-full border border-gray-300 rounded-md px-3 py-2">
-                      <option>6:00 AM - 9:00 AM</option>
-                      <option>9:00 AM - 12:00 PM</option>
-                      <option>12:00 PM - 3:00 PM</option>
-                      <option>3:00 PM - 6:00 PM</option>
-                      <option>6:00 PM - 9:00 PM</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Frequency
-                    </label>
-                    <select className="w-full border border-gray-300 rounded-md px-3 py-2">
-                      <option>Daily</option>
-                      <option>Weekdays Only</option>
-                      <option>Weekends Only</option>
-                      <option>Custom</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <Button className="mt-6 bg-[#004FFF] hover:bg-[#003ACC] text-white">
-                Save Routine Preferences
-              </Button>
-            </div>
-          </div>
-
-          {/* Notification Preferences Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <Bell className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Notification Preferences
-              </h3>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-gray-900">Breaking News Alerts</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
-                >
-                  Enabled
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-gray-900">Daily Newsletter</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
-                >
-                  Enabled
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-gray-900">Sports Updates</span>
-                <Button variant="outline" size="sm">
-                  Disabled
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-gray-900">Weather Alerts</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-blue-50 text-[#004FFF] border-[#004FFF]"
-                >
-                  Enabled
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Topics of Interest Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <BookOpen className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Topics of Interest
-              </h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Politics
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Local News
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Business
-              </Badge>
-              <Badge variant="outline" className="justify-center py-2">
-                Sports
-              </Badge>
-              <Badge variant="outline" className="justify-center py-2">
-                Entertainment
-              </Badge>
-              <Badge
-                variant="secondary"
-                className="bg-blue-50 text-[#004FFF] border-[#004FFF] justify-center py-2"
-              >
-                Technology
-              </Badge>
-            </div>
-            <Button variant="outline" className="mt-4 bg-transparent">
-              Customize Topics
-            </Button>
-          </div>
-
-          {/* Newsletter Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <Mail className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Newsletter Subscriptions
-              </h3>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">Morning Briefing</p>
-                  <p className="text-sm text-gray-600">
-                    Daily news summary delivered at 7 AM
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-green-50 text-green-600 border-green-200"
-                >
-                  Subscribed
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">
-                    Atlanta Business Weekly
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Weekly business insights and market updates
-                  </p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Subscribe
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">Sports Roundup</p>
-                  <p className="text-sm text-gray-600">
-                    Weekly sports highlights and analysis
-                  </p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Subscribe
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Reading History Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <Clock className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Reading History
-              </h3>
-            </div>
-            <div className="space-y-4">
-              <div className="border-b border-gray-100 pb-3">
-                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
-                  Atlanta City Council Approves Major Infrastructure Investment
-                </h4>
-                <p className="text-sm text-gray-600">Read 2 hours ago</p>
-              </div>
-              <div className="border-b border-gray-100 pb-3">
-                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
-                  Georgia Election Results: What You Need to Know
-                </h4>
-                <p className="text-sm text-gray-600">Read yesterday</p>
-              </div>
-              <div className="border-b border-gray-100 pb-3">
-                <h4 className="font-medium text-gray-900 hover:text-[#004FFF] cursor-pointer">
-                  Hawks Trade Rumors Heat Up Before Deadline
-                </h4>
-                <p className="text-sm text-gray-600">Read 2 days ago</p>
-              </div>
-            </div>
-            <Button variant="outline" className="mt-4 bg-transparent">
-              View Full History
-            </Button>
           </div>
         </div>
       </div>
