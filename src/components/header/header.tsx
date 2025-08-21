@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSubscription } from "@/lib/subscription-context";
 
 interface HeaderProps {
   isSubscribed: boolean;
@@ -21,6 +22,7 @@ export default function Header({
   onSubscribeClick,
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { setIsSubscribed } = useSubscription();
 
   return (
     <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
@@ -79,6 +81,7 @@ export default function Header({
                   className="rounded-full border-slate-200 border bg-transparent"
                   variant="outline"
                   size="sm"
+                  onClick={() => setIsSubscribed(true)}
                 >
                   Sign In
                 </Button>

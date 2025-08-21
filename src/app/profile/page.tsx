@@ -13,8 +13,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/header/header";
+import { useSubscription } from "@/lib/subscription-context";
+import { useRouter } from "next/navigation";
 
 export default function ProfileOverlay() {
+  const { setIsSubscribed } = useSubscription();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    setIsSubscribed(false);
+    router.push("/");
+  };
+
   return (
     <div className="bg-white">
       <Header
@@ -129,10 +139,7 @@ export default function ProfileOverlay() {
                   variant="outline"
                   size="sm"
                   className="text-red-600 hover:text-red-700 hover:border-red-300 bg-transparent"
-                  // onClick={() => {
-                  //   setIsSubscribed(false);
-                  //   setShowProfileOverlay(false);
-                  // }}
+                  onClick={handleSignOut}
                 >
                   Sign Out
                 </Button>
