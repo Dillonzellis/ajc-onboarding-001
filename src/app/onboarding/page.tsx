@@ -14,7 +14,9 @@ export default function HomePage() {
     <div className="relative z-10 h-screen flex flex-col justify-center items-center">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center justify-center">
-          <div className={`flex flex-col items-center gap-6 transition-opacity duration-1000 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div
+            className={`flex flex-col items-center gap-6 transition-opacity duration-1000 ease-in-out ${isVisible ? "opacity-100" : "opacity-0"}`}
+          >
             <div className="w-full max-w-[670px] flex items-center justify-center">
               <Image
                 src="/ajc-white-logo.svg"
@@ -32,7 +34,7 @@ export default function HomePage() {
             </h1>
             <div className="mt-6 mb-4 flex items-center w-[400px] justify-center">
               <Image
-                src="/profile-illustration.png"
+                src="profile-Illustration.png"
                 alt="Profile section illustration"
                 width={400}
                 height={100}
