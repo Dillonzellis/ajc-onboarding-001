@@ -149,8 +149,8 @@ export default function ProfileOverlay() {
                 </div>
               )}
               <div className="flex flex-wrap gap-2">
-                <Button asChild variant="outline" size="sm">
-                  <Link href="/">Manage Subscription</Link>
+                <Button variant="outline" size="sm">
+                  Manage Subscription
                 </Button>
                 <Button variant="outline" size="sm">
                   Billing History

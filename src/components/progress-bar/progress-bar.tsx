@@ -1,6 +1,16 @@
+import Link from "next/link";
+
 interface ProgressBarProps {
   currentStep: number;
 }
+
+const stepHrefs = {
+  1: "/onboarding/newsletters",
+  2: "/onboarding/neighborhoods",
+  3: "/onboarding/topics",
+  4: "/onboarding/app-download",
+  5: "/onboarding/review",
+};
 
 export default function ProgressBar({ currentStep }: ProgressBarProps) {
   return (
@@ -11,14 +21,15 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-600 -translate-y-1/2 z-0"></div>
 
             {[1, 2, 3, 4, 5].map((step) => (
-              <div
-                key={step}
-                className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg ${
-                  step <= currentStep ? "bg-blue-600" : "bg-gray-600"
-                }`}
-              >
-                {step}
-              </div>
+              <Link key={step} href={stepHrefs[step as keyof typeof stepHrefs]}>
+                <div
+                  className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg cursor-pointer hover:opacity-80 ${
+                    step <= currentStep ? "bg-blue-600" : "bg-gray-600"
+                  }`}
+                >
+                  {step}
+                </div>
+              </Link>
             ))}
           </div>
         </div>

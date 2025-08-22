@@ -41,7 +41,7 @@ export default function ReviewPage() {
       <ProgressBar currentStep={5} />
       <div
         className={`z-30 relative pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
-          isVisible ? 'opacity-100' : 'opacity-0'
+          isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         <div className="max-w-4xl mx-auto px-4">
@@ -83,7 +83,7 @@ export default function ReviewPage() {
                         <span>{newsletter}</span>
                         <button
                           onClick={() => removeNewsletter(newsletter)}
-                          className="text-red-400 hover:text-red-300 ml-1"
+                          className="text-red-400 hover:text-red-300 ml-1 cursor-pointer"
                         >
                           ×
                         </button>
