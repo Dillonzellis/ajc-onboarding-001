@@ -297,45 +297,30 @@ export default function ProfileOverlay() {
                 <label className="block text-sm font-medium text-gray-700 mb-3">
                   Newsletter Subscriptions
                 </label>
-                <div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {[
-                      "Politically Georgia",
-                      "AJC ePaper Daily",
-                      "Letter from the Editor",
-                      "Today's Top 5",
-                      "A.M. ATLANTA",
-                      "Afternoon Update",
-                      "Breaking News",
-                      "UATL",
-                      "Sports Daily",
-                      "Braves Report",
-                      "Politics",
-                      "Food & Dining",
-                      "Access ATL",
-                      "Aging in Atlanta",
-                      "Evening Update",
-                      "Good Day UGA",
-                      "Jobseekers",
-                      "Pulse Plus",
-                      "Travel",
-                      "Weekend Update",
-                      "AJC Peachtree Road Race",
-                      "Sweet Tea by the AJC",
-                      "Dirty and Birds Dispatch",
-                    ].map((newsletter) => (
-                      <label
-                        key={newsletter}
-                        className="flex items-center py-1"
-                      >
-                        <input type="checkbox" className="mr-2" />
-                        <span className="text-gray-900 text-sm">
-                          {newsletter}
-                        </span>
-                      </label>
-                    ))}
+                {user.onboarding.selectedNewsletters.length > 0 ? (
+                  <div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {user.onboarding.selectedNewsletters.map((newsletter) => (
+                        <label
+                          key={newsletter}
+                          className="flex items-center py-1"
+                        >
+                          <input type="checkbox" className="mr-2" defaultChecked />
+                          <span className="text-gray-900 text-sm">
+                            {newsletter}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="border border-gray-200 rounded-lg p-4 text-center">
+                    <p className="text-gray-600 mb-2">No newsletter subscriptions</p>
+                    <Link href="/onboarding" className="text-[#004FFF] hover:underline text-sm">
+                      Sign up for Newsletter Subscriptions
+                    </Link>
+                  </div>
+                )}
               </div>
 
               {/* Routine Settings */}
