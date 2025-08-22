@@ -5,8 +5,15 @@ import { useUser } from "@/lib/user-context";
 import Link from "next/link";
 
 export default function NewsletterSubscriptions() {
-  const { user } = useUser();
+  const { user, updateOnboarding } = useUser();
   const selectedNewsletters = user.onboarding.selectedNewsletters;
+
+  const toggleNewsletter = (newsletter: string) => {
+    const newNewsletters = selectedNewsletters.includes(newsletter)
+      ? selectedNewsletters.filter((n) => n !== newsletter)
+      : [...selectedNewsletters, newsletter];
+    updateOnboarding({ selectedNewsletters: newNewsletters });
+  };
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-6">
@@ -30,9 +37,10 @@ export default function NewsletterSubscriptions() {
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-green-50 text-green-600 border-green-200"
+                className="text-red-600 hover:text-red-700 hover:border-red-300 bg-transparent"
+                onClick={() => toggleNewsletter(newsletter)}
               >
-                Subscribed
+                Unsubscribe
               </Button>
             </div>
           ))}

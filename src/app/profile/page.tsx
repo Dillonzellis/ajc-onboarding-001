@@ -12,7 +12,7 @@ import Neighborhoods from "@/components/profile/neighborhoods";
 import NewsletterSubscriptions from "@/components/profile/newsletter-subscriptions";
 
 export default function ProfileOverlay() {
-  const { user, setSubscription, updateUser, resetUser, isHydrated } = useUser();
+  const { user, updateUser, resetUser, isHydrated } = useUser();
   const router = useRouter();
 
   if (!isHydrated) {
