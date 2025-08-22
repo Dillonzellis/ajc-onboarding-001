@@ -139,13 +139,26 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateOnboarding = (onboardingData: Partial<User["onboarding"]>) => {
-    setUser((prev) => ({
-      ...prev,
-      onboarding: {
+    setUser((prev) => {
+      const updatedOnboarding = {
         ...prev.onboarding,
         ...onboardingData,
-      },
-    }));
+      };
+      
+      // Auto-complete onboarding if any selection is made
+      const hasSelections = 
+        updatedOnboarding.selectedNewsletters.length > 0 ||
+        updatedOnboarding.selectedNeighborhoods.length > 0 ||
+        updatedOnboarding.selectedTopics.length > 0;
+      
+      return {
+        ...prev,
+        onboarding: {
+          ...updatedOnboarding,
+          isCompleted: hasSelections,
+        },
+      };
+    });
   };
 
   const completeOnboarding = () => {
