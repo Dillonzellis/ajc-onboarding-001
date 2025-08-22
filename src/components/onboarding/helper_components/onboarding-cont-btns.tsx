@@ -3,14 +3,12 @@ import Link from "next/link";
 interface OnboardingContBtnsProps {
   backLink: string;
   contLink: string;
-  onClick?: () => void;
   contText?: string;
 }
 
 export default function OnboardingContBtns({
   backLink,
   contLink,
-  onClick,
   contText = "Continue",
 }: OnboardingContBtnsProps) {
   return (
@@ -22,7 +20,6 @@ export default function OnboardingContBtns({
         Back
       </Link>
       <Link
-        onClick={onClick}
         href={contLink}
         className="bg-white text-gray-800 justify-center items-center flex px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
       >

@@ -164,7 +164,6 @@ export default function ReviewPage() {
               backLink="/onboarding/app-download"
               contLink="/"
               contText="Finish Setup"
-              onClick={completeOnboarding}
             />
           </div>
         </div>
