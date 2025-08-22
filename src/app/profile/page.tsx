@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Camera, Clock, Mail, Settings, User } from "lucide-react";
+import { Bell, Camera, Clock, Settings, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
@@ -8,6 +8,8 @@ import { useUser } from "@/lib/user-context";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import TopicsOfInterest from "@/components/profile/topics-of-interest";
+import Neighborhoods from "@/components/profile/neighborhoods";
+import NewsletterSubscriptions from "@/components/profile/newsletter-subscriptions";
 
 export default function ProfileOverlay() {
   const { user, setSubscription, updateUser } = useUser();
@@ -48,7 +50,8 @@ export default function ProfileOverlay() {
           <div className="max-w-4xl mx-auto mb-6">
             <div className="bg-blue-50 border border-[#004FFF] rounded-lg p-4">
               <p className="text-[#004FFF] font-medium">
-                Complete your setup by selecting topics of interest below to personalize your custom feed.
+                Complete your setup by selecting topics of interest below to
+                personalize your custom feed.
               </p>
             </div>
           </div>
@@ -143,7 +146,7 @@ export default function ProfileOverlay() {
               )}
               <div className="flex flex-wrap gap-2">
                 <Button asChild variant="outline" size="sm">
-                  <Link href="/onboarding">Manage Subscription</Link>
+                  <Link href="/">Manage Subscription</Link>
                 </Button>
                 <Button variant="outline" size="sm">
                   Billing History
@@ -157,7 +160,7 @@ export default function ProfileOverlay() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-red-600 hover:text-red-700 hover:border-red-300 bg-transparent"
+                  className="text-red-600 hover:text-red-700 hover:border-red-300 bg-transparent cursor-pointer"
                   onClick={handleSignOut}
                 >
                   Sign Out
@@ -434,57 +437,8 @@ export default function ProfileOverlay() {
           </div>
 
           <TopicsOfInterest />
-
-          {/* Newsletter Section */}
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <div className="flex items-center mb-4">
-              <Mail className="h-5 w-5 text-gray-600 mr-2" />
-              <h3 className="text-xl font-semibold text-gray-900">
-                Newsletter Subscriptions
-              </h3>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">Morning Briefing</p>
-                  <p className="text-sm text-gray-600">
-                    Daily news summary delivered at 7 AM
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="bg-green-50 text-green-600 border-green-200"
-                >
-                  Subscribed
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">
-                    Atlanta Business Weekly
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Weekly business insights and market updates
-                  </p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Subscribe
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900">Sports Roundup</p>
-                  <p className="text-sm text-gray-600">
-                    Weekly sports highlights and analysis
-                  </p>
-                </div>
-                <Button variant="outline" size="sm">
-                  Subscribe
-                </Button>
-              </div>
-            </div>
-          </div>
+          <Neighborhoods />
+          <NewsletterSubscriptions />
 
           {/* Reading History Section */}
           <div className="bg-white border border-gray-200 rounded-lg p-6">

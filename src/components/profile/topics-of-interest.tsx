@@ -48,9 +48,9 @@ export default function TopicsOfInterest() {
           />
         ))}
       </div>
-      <Button asChild variant="outline" className="mt-4 bg-transparent">
-        <Link href="/onboarding">Customize Topics</Link>
-      </Button>
+      {/* <Button asChild variant="outline" className="mt-4 bg-transparent"> */}
+      {/*   <Link href="/onboarding">Customize Topics</Link> */}
+      {/* </Button> */}
     </div>
   );
 }
