@@ -1,7 +1,7 @@
 import { BookOpen } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { topics } from "./mock-data";
+import { topics } from "../onboarding/mock-data";
 import { useUser } from "@/lib/user-context";
 import Link from "next/link";
 

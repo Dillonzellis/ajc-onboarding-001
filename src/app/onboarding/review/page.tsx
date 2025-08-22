@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useUser } from "@/lib/user-context";
-import { Button } from "@/components/ui/button";
 import ProgressBar from "@/components/progress-bar/progress-bar";
+import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
 
 export default function ReviewPage() {
   const { user, updateOnboarding, completeOnboarding } = useUser();
@@ -31,7 +31,7 @@ export default function ReviewPage() {
   };
 
   return (
-    <>
+    <div>
       <ProgressBar currentStep={5} />
       <div
         className={`z-30 relative pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
@@ -152,26 +152,15 @@ export default function ReviewPage() {
                 )}
               </div>
             </div>
-
-            <div className="flex justify-center gap-4 mt-12">
-              <Button
-                asChild
-                className="bg-transparent text-white border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-colors"
-              >
-                <Link href="">Back</Link>
-              </Button>
-              <Button
-                asChild
-                className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-              >
-                <Link href="/" onClick={completeOnboarding} className="">
-                  Finish Setup
-                </Link>
-              </Button>
-            </div>
+            <OnboardingContBtns
+              backLink="onboarding/app-download"
+              contLink="/"
+              contText="Finish Setup"
+              onClick={completeOnboarding}
+            />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

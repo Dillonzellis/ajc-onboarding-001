@@ -1,22 +1,13 @@
 "use client";
 
-import {
-  Bell,
-  BookOpen,
-  Camera,
-  Clock,
-  Mail,
-  Settings,
-  User,
-} from "lucide-react";
+import { Bell, Camera, Clock, Mail, Settings, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Header from "@/components/header/header";
 import { useUser } from "@/lib/user-context";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import TopicsOfInterest from "@/components/onboarding/topics-of-interest";
+import TopicsOfInterest from "@/components/profile/topics-of-interest";
 
 export default function ProfileOverlay() {
   const { user, setSubscription, updateUser } = useUser();

@@ -32,9 +32,12 @@ export default function HomePage() {
                 priority
               />
             </div>
-            <button className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors mt-4">
-              <Link href="/onboarding/newsletters">Let&apos;s get started</Link>
-            </button>
+            <Link
+              className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors mt-4"
+              href="/onboarding/newsletters"
+            >
+              Let&apos;s get started
+            </Link>
           </div>
         </div>
       </div>
