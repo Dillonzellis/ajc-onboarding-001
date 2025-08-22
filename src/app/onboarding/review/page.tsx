@@ -160,13 +160,14 @@ export default function ReviewPage() {
               >
                 <Link href="">Back</Link>
               </Button>
-              <Link
-                href="/"
-                onClick={completeOnboarding}
+              <Button
+                asChild
                 className="bg-white text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
               >
-                Finish Setup
-              </Link>
+                <Link href="/" onClick={completeOnboarding} className="">
+                  Finish Setup
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
