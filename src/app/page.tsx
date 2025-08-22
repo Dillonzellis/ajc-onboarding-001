@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Share2, Plus, Volume2, X, Bookmark, Play } from "lucide-react";
+import { Share2, Plus, Volume2, X, Play } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/header/header";

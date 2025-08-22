@@ -7,7 +7,7 @@ import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
 
 export default function ReviewPage() {
-  const { user, updateOnboarding, completeOnboarding } = useUser();
+  const { user, updateOnboarding } = useUser();
   const { selectedNeighborhoods, selectedNewsletters, selectedTopics } =
     user.onboarding;
   const [isVisible, setIsVisible] = useState(false);
