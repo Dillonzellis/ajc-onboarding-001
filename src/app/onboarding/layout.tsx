@@ -2,7 +2,6 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import { UserProvider } from "@/lib/user-context";
-import ProgressBar from "@/components/progress-bar/progress-bar";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -38,7 +37,7 @@ html {
               className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-8"
               style={{ backgroundImage: "url('/atlanta-skyline.png')" }}
             ></div>
-            <ProgressBar />
+
             <div className="z-20">{children}</div>
           </main>
         </UserProvider>

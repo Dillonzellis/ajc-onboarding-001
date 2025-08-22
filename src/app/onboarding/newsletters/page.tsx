@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useUser } from "@/lib/user-context";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import ProgressBar from "@/components/progress-bar/progress-bar";
 
 export default function NewsletterPage() {
   const [hoveredNewsletter, setHoveredNewsletter] = useState<string | null>(
@@ -33,9 +34,11 @@ export default function NewsletterPage() {
   };
 
   return (
-    <div
-      className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
-    >
+    <>
+      <ProgressBar currentStep={2} />
+      <div
+        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+      >
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center justify-center mb-16 mt-10">
           <div className="flex items-center gap-3 mb-4">
@@ -134,5 +137,6 @@ export default function NewsletterPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

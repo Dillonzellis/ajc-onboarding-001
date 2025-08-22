@@ -1,10 +1,8 @@
-"use client";
+interface ProgressBarProps {
+  currentStep: number;
+}
 
-import { useState } from "react";
-
-export default function ProgressBar() {
-  const [currentStep, setCurrentStep] = useState(0);
-
+export default function ProgressBar({ currentStep }: ProgressBarProps) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       <div className="p-6" style={{ backgroundColor: "#282828" }}>
