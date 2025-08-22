@@ -44,6 +44,15 @@ export default function ProfileOverlay() {
         savedStoriesCount={user.savedStories.length}
       />
       <div className="p-6">
+        {!user.onboarding.isCompleted && (
+          <div className="max-w-4xl mx-auto mb-6">
+            <div className="bg-blue-50 border border-[#004FFF] rounded-lg p-4">
+              <p className="text-[#004FFF] font-medium">
+                Complete your setup by selecting topics of interest below to personalize your custom feed.
+              </p>
+            </div>
+          </div>
+        )}
         <div className="flex justify-between items-center mb-8 md:max-w-4xl md:mx-auto">
           <h2 className="text-3xl font-bold text-gray-900">Hello Jason!</h2>
         </div>

@@ -68,7 +68,12 @@ export default function Header({
                   variant="outline"
                   size="sm"
                 >
-                  <Link href="/profile">Profile</Link>
+                  <Link href="/profile" className="flex items-center gap-2">
+                    Profile
+                    {!user.onboarding.isCompleted && (
+                      <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                    )}
+                  </Link>
                 </Button>
               </>
             ) : (
