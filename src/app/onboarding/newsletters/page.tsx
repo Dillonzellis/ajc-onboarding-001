@@ -4,7 +4,7 @@ import {
   allNewsletters,
   newsletterDescriptions,
 } from "@/components/onboarding/mock-data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "@/lib/user-context";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
@@ -13,6 +13,11 @@ export default function NewsletterPage() {
   const [hoveredNewsletter, setHoveredNewsletter] = useState<string | null>(
     null,
   );
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
   const toggleNewsletter = (newsletter: string) => {
     const newNewsletters = selectedNewsletters.includes(newsletter)
       ? selectedNewsletters.filter((n) => n !== newsletter)
@@ -31,7 +36,9 @@ export default function NewsletterPage() {
     <div>
       <ProgressBar currentStep={1} />
       <div
-        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col items-center justify-center mb-16 mt-10">

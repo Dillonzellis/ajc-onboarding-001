@@ -1,12 +1,20 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <div className="relative z-10 h-screen flex flex-col justify-center items-center">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-col items-center gap-6">
+          <div className={`flex flex-col items-center gap-6 transition-opacity duration-1000 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="w-full max-w-[670px] flex items-center justify-center">
               <Image
                 src="/ajc-white-logo.svg"

@@ -2,12 +2,18 @@
 
 import { useUser } from "@/lib/user-context";
 import { neighborhoods } from "@/components/onboarding/mock-data";
+import { useState, useEffect } from "react";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
 
 export default function NeighborhoodsPage() {
   const { user, updateOnboarding, completeOnboarding } = useUser();
   const { selectedNeighborhoods, selectedTopics } = user.onboarding;
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const toggleNeighborhood = (neighborhood: string) => {
     const newNeighborhoods = selectedNeighborhoods.includes(neighborhood)
@@ -20,7 +26,9 @@ export default function NeighborhoodsPage() {
     <div>
       <ProgressBar currentStep={2} />
       <div
-        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col items-center justify-center mb-12 mt-10">

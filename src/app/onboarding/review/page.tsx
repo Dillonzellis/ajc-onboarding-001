@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useUser } from "@/lib/user-context";
+import { useState, useEffect } from "react";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
 
@@ -9,6 +10,11 @@ export default function ReviewPage() {
   const { user, updateOnboarding, completeOnboarding } = useUser();
   const { selectedNeighborhoods, selectedNewsletters, selectedTopics } =
     user.onboarding;
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const removeNewsletter = (newsletter: string) => {
     updateOnboarding({
@@ -34,7 +40,9 @@ export default function ReviewPage() {
     <div>
       <ProgressBar currentStep={5} />
       <div
-        className={`z-30 relative pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+        className={`z-30 relative pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center">
@@ -153,7 +161,7 @@ export default function ReviewPage() {
               </div>
             </div>
             <OnboardingContBtns
-              backLink="onboarding/app-download"
+              backLink="/onboarding/app-download"
               contLink="/"
               contText="Finish Setup"
               onClick={completeOnboarding}

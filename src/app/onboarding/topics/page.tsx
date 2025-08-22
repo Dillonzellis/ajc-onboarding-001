@@ -2,11 +2,17 @@
 
 import { topics } from "@/components/onboarding/mock-data";
 import { useUser } from "@/lib/user-context";
+import { useState, useEffect } from "react";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
 
 export default function TopicsPage() {
   const { user, updateOnboarding } = useUser();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const { selectedTopics } = user.onboarding;
 
@@ -21,7 +27,9 @@ export default function TopicsPage() {
     <div>
       <ProgressBar currentStep={3} />
       <div
-        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col items-center justify-center mb-8 mt-10">

@@ -1,13 +1,23 @@
+"use client";
 import Image from "next/image";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import OnboardingContBtns from "@/components/onboarding/helper_components/onboarding-cont-btns";
+import { useState, useEffect } from "react";
 
 export default function AppDownLoadPage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <div>
       <ProgressBar currentStep={4} />
       <div
-        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+        className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500 ease-in-out ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
       >
         <div className="max-w-4xl mx-auto">
           <div className="text-center px-4">
