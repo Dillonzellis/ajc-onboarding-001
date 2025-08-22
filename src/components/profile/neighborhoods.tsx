@@ -12,17 +12,20 @@ const neighborhoodNames = neighborhoods.map(
 const NeighborhoodBadge = ({
   neighborhoodName,
   isSelected,
+  onToggle,
 }: {
   neighborhoodName: string;
   isSelected: boolean;
+  onToggle: () => void;
 }) => {
   return (
     <Badge
       variant={isSelected ? "secondary" : "outline"}
       className={`
-        justify-center py-2
+        justify-center py-2 cursor-pointer transition-colors hover:bg-blue-100
         ${isSelected ? "bg-blue-50 text-[#004FFF] border-[#004FFF]" : ""}
       `}
+      onClick={onToggle}
     >
       {neighborhoodName}
     </Badge>
@@ -30,8 +33,15 @@ const NeighborhoodBadge = ({
 };
 
 export default function Neighborhoods() {
-  const { user } = useUser();
+  const { user, updateOnboarding } = useUser();
   const selectedNeighborhoods = user.onboarding.selectedNeighborhoods;
+
+  const toggleNeighborhood = (neighborhood: string) => {
+    const newNeighborhoods = selectedNeighborhoods.includes(neighborhood)
+      ? selectedNeighborhoods.filter((n) => n !== neighborhood)
+      : [...selectedNeighborhoods, neighborhood];
+    updateOnboarding({ selectedNeighborhoods: newNeighborhoods });
+  };
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-6">
@@ -45,6 +55,7 @@ export default function Neighborhoods() {
             key={neighborhoodName}
             neighborhoodName={neighborhoodName}
             isSelected={selectedNeighborhoods.includes(neighborhoodName)}
+            onToggle={() => toggleNeighborhood(neighborhoodName)}
           />
         ))}
       </div>

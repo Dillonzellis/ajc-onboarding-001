@@ -35,6 +35,8 @@ interface UserContextType {
   ) => void;
   updateOnboarding: (onboardingData: Partial<User["onboarding"]>) => void;
   completeOnboarding: () => void;
+  resetUser: () => void;
+  isHydrated: boolean;
 }
 
 const defaultUser: User = {
@@ -59,23 +61,35 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User>(defaultUser);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load user data from localStorage on mount
+  // Load user data from localStorage after hydration
   useEffect(() => {
     const stored = localStorage.getItem("userData");
     if (stored) {
       try {
-        setUser({ ...defaultUser, ...JSON.parse(stored) });
+        const storedUser = JSON.parse(stored);
+        setUser({
+          ...defaultUser,
+          ...storedUser,
+          onboarding: {
+            ...defaultUser.onboarding,
+            ...storedUser.onboarding,
+          },
+        });
       } catch (error) {
         console.error("Failed to parse user data from localStorage:", error);
       }
     }
+    setIsHydrated(true);
   }, []);
 
-  // Save user data to localStorage when it changes
+  // Save user data to localStorage when it changes (but only after hydration)
   useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(user));
-  }, [user]);
+    if (isHydrated) {
+      localStorage.setItem("userData", JSON.stringify(user));
+    }
+  }, [user, isHydrated]);
 
   const updateUser = (updates: Partial<User>) => {
     setUser((prev) => ({ ...prev, ...updates }));
@@ -144,6 +158,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  const resetUser = () => {
+    setUser(defaultUser);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -156,6 +174,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setSubscription,
         updateOnboarding,
         completeOnboarding,
+        resetUser,
+        isHydrated,
       }}
     >
       {children}

@@ -12,11 +12,15 @@ import Neighborhoods from "@/components/profile/neighborhoods";
 import NewsletterSubscriptions from "@/components/profile/newsletter-subscriptions";
 
 export default function ProfileOverlay() {
-  const { user, setSubscription, updateUser } = useUser();
+  const { user, setSubscription, updateUser, resetUser, isHydrated } = useUser();
   const router = useRouter();
 
+  if (!isHydrated) {
+    return null; // Prevents flash, hydration happens very quickly
+  }
+
   const handleSignOut = () => {
-    setSubscription(false);
+    resetUser();
     router.push("/");
   };
 
