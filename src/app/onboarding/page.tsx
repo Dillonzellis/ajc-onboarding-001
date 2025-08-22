@@ -34,7 +34,7 @@ export default function HomePage() {
             </h1>
             <div className="mt-6 mb-4 flex items-center w-[400px] justify-center">
               <Image
-                src="profile-Illustration.png"
+                src="/profile-Illustration.png"
                 alt="Profile section illustration"
                 width={400}
                 height={100}
