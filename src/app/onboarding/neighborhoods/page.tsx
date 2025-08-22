@@ -60,7 +60,7 @@ export default function NeighborhoodsPage() {
               className={`px-8 py-3 rounded-full font-semibold transition-colors ${
                 selectedNeighborhoods.includes("Dunwoody")
                   ? "bg-white text-gray-800"
-                  : "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-800"
+                  : "bg-transparent text-white border-2 border-white cursor-pointer hover:bg-white hover:text-gray-800"
               }`}
             >
               Yes
@@ -74,7 +74,7 @@ export default function NeighborhoodsPage() {
                   selectedNeighborhoods: newNeighborhoods,
                 });
               }}
-              className={`px-8 py-3 rounded-full font-semibold transition-colors ${
+              className={`px-8 py-3 rounded-full cursor-pointer font-semibold transition-colors ${
                 !selectedNeighborhoods.includes("Dunwoody")
                   ? "bg-white text-gray-800"
                   : "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-800"
@@ -96,6 +96,7 @@ export default function NeighborhoodsPage() {
                 className={`
                       ${neighborhood.size}
                       rounded-full 
+                      cursor-pointer
                       flex items-center justify-center p-4
                       transition-all duration-300 ease-in-out
                       hover:scale-110 hover:border-blue-400

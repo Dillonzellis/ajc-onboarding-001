@@ -71,6 +71,7 @@ export default function NewsletterPage() {
                   className={`
                         ${newsletter.size}
                         rounded-full 
+                        cursor-pointer
                         flex items-center justify-center p-4
                         transition-all duration-300 ease-in-out
                         hover:scale-110 hover:border-blue-400

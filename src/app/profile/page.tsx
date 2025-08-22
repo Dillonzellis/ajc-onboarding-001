@@ -424,7 +424,6 @@ export default function ProfileOverlay() {
             </div>
           </div>
 
-          {/* Topics of Interest Section */}
           <TopicsOfInterest />
 
           {/* Newsletter Section */}

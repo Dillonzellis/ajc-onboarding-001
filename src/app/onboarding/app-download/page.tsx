@@ -23,6 +23,7 @@ export default function AppDownLoadPage() {
                 width={800}
                 height={400}
                 className="object-contain max-w-full h-auto"
+                priority
               />
             </div>
             <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-12 mx-auto max-w-4xl">
