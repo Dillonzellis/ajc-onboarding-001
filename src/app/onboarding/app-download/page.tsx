@@ -1,17 +1,11 @@
-"use client";
-
-import type React from "react";
-
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useUser } from "@/lib/user-context";
 import { Button } from "@/components/ui/button";
 
 export default function AppDownLoadPage() {
   return (
     <div
-      className={`pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+      className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
     >
       <div className="max-w-4xl mx-auto">
         <div className="text-center px-4">

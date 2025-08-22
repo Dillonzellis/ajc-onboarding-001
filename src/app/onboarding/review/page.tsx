@@ -31,7 +31,7 @@ export default function ReviewPage() {
 
   return (
     <div
-      className={`pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+      className={`z-30 relative pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
     >
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center">

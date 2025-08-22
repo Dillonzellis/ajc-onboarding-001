@@ -39,7 +39,7 @@ html {
               style={{ backgroundImage: "url('/atlanta-skyline.png')" }}
             ></div>
             <ProgressBar />
-            <div className="z-5">{children}</div>
+            <div className="z-20">{children}</div>
           </main>
         </UserProvider>
       </body>

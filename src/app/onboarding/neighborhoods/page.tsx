@@ -18,7 +18,7 @@ export default function NeighborhoodsPage() {
 
   return (
     <div
-      className={`pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
+      className={`relative z-30 pt-32 md:pt-24 pb-12 min-h-screen transition-opacity duration-500`}
     >
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center justify-center mb-12 mt-10">

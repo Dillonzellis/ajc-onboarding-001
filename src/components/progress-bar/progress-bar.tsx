@@ -6,7 +6,7 @@ export default function ProgressBar() {
   const [currentStep, setCurrentStep] = useState(0);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-10">
+    <div className="fixed top-0 left-0 right-0 z-50">
       <div className="p-6" style={{ backgroundColor: "#282828" }}>
         <div className="max-w-4xl mx-auto">
           <div className="relative flex items-center justify-between">
