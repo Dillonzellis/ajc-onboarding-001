@@ -23,8 +23,8 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
             {[1, 2, 3, 4, 5].map((step) => (
               <Link key={step} href={stepHrefs[step as keyof typeof stepHrefs]}>
                 <div
-                  className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg cursor-pointer hover:opacity-80 ${
-                    step <= currentStep ? "bg-blue-600" : "bg-gray-600"
+                  className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg ${
+                    step <= currentStep ? "bg-blue-600 hover:bg-blue-500" : "bg-gray-600 hover:bg-gray-500"
                   }`}
                 >
                   {step}
