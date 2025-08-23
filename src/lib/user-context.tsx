@@ -86,8 +86,14 @@ function getInitialUser(): User {
 }
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>(getInitialUser);
-  const [isHydrated, setIsHydrated] = useState(true);
+  const [user, setUser] = useState<User>(defaultUser);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    const storedUser = getInitialUser();
+    setUser(storedUser);
+    setIsHydrated(true);
+  }, []);
 
   // Save user data to localStorage when it changes
   useEffect(() => {

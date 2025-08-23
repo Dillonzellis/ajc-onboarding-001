@@ -17,7 +17,7 @@ export default function Header({
   onSavedClick,
   onSubscribeClick,
 }: HeaderProps) {
-  const { user, setSubscription } = useUser();
+  const { user, setSubscription, isHydrated } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -52,7 +52,25 @@ export default function Header({
             </nav>
           </div>
           <div className="flex items-center space-x-4">
-            {user.subscription.isActive ? (
+            {!isHydrated ? (
+              <>
+                <Button
+                  className="rounded-full border-slate-200 border bg-transparent"
+                  variant="outline"
+                  size="sm"
+                  disabled
+                >
+                  Sign In
+                </Button>
+                <Button
+                  size="sm"
+                  className="bg-[#004FFF] hover:bg-[#003ACC] rounded-full"
+                  disabled
+                >
+                  Subscribe
+                </Button>
+              </>
+            ) : user.subscription.isActive ? (
               <>
                 <Button
                   className="rounded-full bg-transparent"
