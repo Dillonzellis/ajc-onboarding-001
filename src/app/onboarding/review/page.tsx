@@ -148,7 +148,7 @@ export default function ReviewPage() {
                         <span>{topic}</span>
                         <button
                           onClick={() => removeTopic(topic)}
-                          className="text-red-400 hover:text-red-300 ml-1"
+                          className="text-red-400 cursor-pointer hover:text-red-300 ml-1"
                         >
                           ×
                         </button>
