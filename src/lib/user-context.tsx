@@ -9,6 +9,7 @@ interface User {
     renewalDate?: string;
   };
   savedStories: string[];
+  followedJournalists: string[];
   preferences: {
     theme: "light" | "dark";
     notifications: boolean;
@@ -26,8 +27,10 @@ interface UserContextType {
   updateUser: (updates: Partial<User>) => void;
   addSavedStory: (storyId: string) => void;
   removeSavedStory: (storyId: string) => void;
-  // addTopic: (topic: string) => void;
-  // removeTopic: (topic: string) => void;
+  isStorySaved: (storyId: string) => boolean;
+  addFollowedJournalist: (journalistId: string) => void;
+  removeFollowedJournalist: (journalistId: string) => void;
+  isJournalistFollowed: (journalistId: string) => boolean;
   setSubscription: (
     isActive: boolean,
     plan?: string,
@@ -45,6 +48,7 @@ const defaultUser: User = {
     plan: "",
   },
   savedStories: [],
+  followedJournalists: [],
   preferences: {
     theme: "light",
     notifications: true,
@@ -59,37 +63,38 @@ const defaultUser: User = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>(defaultUser);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Load user data from localStorage after hydration
-  useEffect(() => {
+function getInitialUser(): User {
+  if (typeof window === 'undefined') return defaultUser;
+  
+  try {
     const stored = localStorage.getItem("userData");
     if (stored) {
-      try {
-        const storedUser = JSON.parse(stored);
-        setUser({
-          ...defaultUser,
-          ...storedUser,
-          onboarding: {
-            ...defaultUser.onboarding,
-            ...storedUser.onboarding,
-          },
-        });
-      } catch (error) {
-        console.error("Failed to parse user data from localStorage:", error);
-      }
+      const storedUser = JSON.parse(stored);
+      return {
+        ...defaultUser,
+        ...storedUser,
+        onboarding: {
+          ...defaultUser.onboarding,
+          ...storedUser.onboarding,
+        },
+      };
     }
-    setIsHydrated(true);
-  }, []);
+  } catch (error) {
+    console.error("Failed to parse user data from localStorage:", error);
+  }
+  return defaultUser;
+}
 
-  // Save user data to localStorage when it changes (but only after hydration)
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User>(getInitialUser);
+  const [isHydrated, setIsHydrated] = useState(true);
+
+  // Save user data to localStorage when it changes
   useEffect(() => {
-    if (isHydrated) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem("userData", JSON.stringify(user));
     }
-  }, [user, isHydrated]);
+  }, [user]);
 
   const updateUser = (updates: Partial<User>) => {
     setUser((prev) => ({ ...prev, ...updates }));
@@ -107,6 +112,28 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       ...prev,
       savedStories: prev.savedStories.filter((id) => id !== storyId),
     }));
+  };
+
+  const isStorySaved = (storyId: string) => {
+    return user.savedStories.includes(storyId);
+  };
+
+  const addFollowedJournalist = (journalistId: string) => {
+    setUser((prev) => ({
+      ...prev,
+      followedJournalists: [...prev.followedJournalists, journalistId],
+    }));
+  };
+
+  const removeFollowedJournalist = (journalistId: string) => {
+    setUser((prev) => ({
+      ...prev,
+      followedJournalists: prev.followedJournalists.filter((id) => id !== journalistId),
+    }));
+  };
+
+  const isJournalistFollowed = (journalistId: string) => {
+    return user.followedJournalists.includes(journalistId);
   };
 
   // const addTopic = (topic: string) => {
@@ -182,8 +209,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         updateUser,
         addSavedStory,
         removeSavedStory,
-        // addTopic,
-        // removeTopic,
+        isStorySaved,
+        addFollowedJournalist,
+        removeFollowedJournalist,
+        isJournalistFollowed,
         setSubscription,
         updateOnboarding,
         completeOnboarding,

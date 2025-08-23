@@ -5,6 +5,7 @@ import { Bell, Camera, Clock, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 import { useUser } from "@/lib/user-context";
+import { useSavedStories } from "@/lib/use-saved-stories";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import TopicsOfInterest from "@/components/profile/topics-of-interest";
@@ -13,6 +14,7 @@ import NewsletterSubscriptions from "@/components/profile/newsletter-subscriptio
 
 export default function ProfileOverlay() {
   const { user, updateUser, resetUser, isHydrated } = useUser();
+  const { savedStoriesCount } = useSavedStories();
   const router = useRouter();
 
   if (!isHydrated) {
@@ -45,9 +47,9 @@ export default function ProfileOverlay() {
   return (
     <div className="bg-white">
       <Header
-        onSavedClick={() => {}}
-        onSubscribeClick={() => {}}
-        savedStoriesCount={user.savedStories.length}
+        onSavedClick={() => router.push("/profile/saved")}
+        onSubscribeClick={() => router.push("/subscribe")}
+        savedStoriesCount={savedStoriesCount}
       />
       <div className="p-6">
         {!user.onboarding.isCompleted && (

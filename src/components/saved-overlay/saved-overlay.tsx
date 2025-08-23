@@ -3,23 +3,9 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { X, Search, Bookmark, UserPlus } from "lucide-react";
 import { Button } from "../ui/button";
+import { Story, Journalist } from "@/lib/story-data";
 
-interface Story {
-  id: string;
-  title: string;
-  subtitle: string;
-  author: string;
-  date: string;
-  readTime: string;
-  category: string;
-  image: string;
-}
-
-interface Journalist {
-  id: string;
-  name: string;
-  title: string;
-  avatar: string;
+interface JournalistWithFollowDate extends Journalist {
   followedDate: string;
 }
 
@@ -27,7 +13,7 @@ interface SavedOverlayProps {
   isOpen: boolean;
   savedTab: "articles" | "journalists";
   savedStories: Story[];
-  followedJournalists: Journalist[];
+  followedJournalists: JournalistWithFollowDate[];
   searchQuery: string;
   filteredSavedStories: Story[];
   onClose: () => void;
