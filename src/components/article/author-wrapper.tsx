@@ -26,7 +26,7 @@ export default function AuthorWrapper() {
           <Button
             variant="outline"
             size="sm"
-            className="h-7 px-3 text-xs bg-transparent rounded-full"
+            className="h-7 px-3 cursor-pointer text-xs bg-transparent rounded-full"
             onClick={handleFollowJournalist}
           >
             <Plus className="h-3 w-3 mr-1" />

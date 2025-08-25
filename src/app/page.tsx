@@ -51,8 +51,8 @@ export default function StoryPage() {
                   onClick={handleSaveStory}
                   className={
                     isStorySaved(currentStoryId)
-                      ? "bg-[#004FFF] hover:bg-[#003ACC] text-white"
-                      : ""
+                      ? "bg-[#004FFF] cursor-pointer hover:bg-[#003ACC] text-white"
+                      : "cursor-pointer"
                   }
                 >
                   <Bookmark

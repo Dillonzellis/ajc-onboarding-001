@@ -11,7 +11,7 @@ export default function AudioPlayer() {
     <>
       {!showAudioPlayer ? (
         <Button
-          className="rounded-full bg-transparent"
+          className="rounded-full cursor-pointer bg-transparent"
           variant="outline"
           size="sm"
           onClick={() => setShowAudioPlayer(true)}
@@ -27,14 +27,14 @@ export default function AudioPlayer() {
             className="h-8 w-8 p-0 rounded-full"
             onClick={() => setShowAudioPlayer(false)}
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4 cursor-pointer" />
           </Button>
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 w-8 p-0 rounded-full bg-[#004FFF] hover:bg-[#003ACC] text-white"
+            className="h-8 w-8 p-0 rounded-full bg-[#004FFF] hover:bg-[#003ACC] text-white hover:text-white"
           >
-            <Play className="h-4 w-4" />
+            <Play className="h-4 w-4 hover:text-white" />
           </Button>
           <div className="flex items-center space-x-2">
             <span className="text-sm text-gray-600">0:00</span>

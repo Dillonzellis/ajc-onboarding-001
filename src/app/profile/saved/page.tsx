@@ -10,8 +10,16 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default function SavedPage() {
   const router = useRouter();
-  const { savedStories, followedJournalists, savedStoriesCount, removeSavedStory, removeFollowedJournalist } = useSavedStories();
-  const [activeTab, setActiveTab] = useState<"articles" | "journalists">("articles");
+  const {
+    savedStories,
+    followedJournalists,
+    savedStoriesCount,
+    removeSavedStory,
+    removeFollowedJournalist,
+  } = useSavedStories();
+  const [activeTab, setActiveTab] = useState<"articles" | "journalists">(
+    "articles",
+  );
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredSavedStories = savedStories.filter(
@@ -45,7 +53,7 @@ export default function SavedPage() {
         <div className="flex space-x-8 mb-8 border-b border-gray-200">
           <button
             onClick={() => setActiveTab("articles")}
-            className={`pb-4 text-sm font-medium border-b-2 transition-colors ${
+            className={`pb-4 text-sm font-medium cursor-pointer border-b-2 transition-colors ${
               activeTab === "articles"
                 ? "border-[#004FFF] text-[#004FFF]"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -55,7 +63,7 @@ export default function SavedPage() {
           </button>
           <button
             onClick={() => setActiveTab("journalists")}
-            className={`pb-4 text-sm font-medium border-b-2 transition-colors ${
+            className={`pb-4 text-sm font-medium cursor-pointer border-b-2 transition-colors ${
               activeTab === "journalists"
                 ? "border-[#004FFF] text-[#004FFF]"
                 : "border-transparent text-gray-500 hover:text-gray-700"
@@ -86,14 +94,21 @@ export default function SavedPage() {
               <div className="text-center py-16">
                 <Bookmark className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                  {savedStories.length === 0 ? "No saved stories yet" : "No articles match your search"}
+                  {savedStories.length === 0
+                    ? "No saved stories yet"
+                    : "No articles match your search"}
                 </h2>
                 <p className="text-gray-600 mb-6">
                   {savedStories.length === 0
                     ? "Stories you save will appear here for easy access later."
                     : "Try adjusting your search terms to find what you're looking for."}
                 </p>
-                <Button onClick={() => router.push("/")}>Continue Reading</Button>
+                <Button
+                  className="cursor-pointer"
+                  onClick={() => router.push("/")}
+                >
+                  Continue Reading
+                </Button>
               </div>
             ) : (
               <div className="space-y-6">
@@ -125,13 +140,15 @@ export default function SavedPage() {
                             <p className="text-gray-600 text-sm mb-2 line-clamp-2">
                               {story.subtitle}
                             </p>
-                            <p className="text-sm text-gray-500">By {story.author}</p>
+                            <p className="text-sm text-gray-500">
+                              By {story.author}
+                            </p>
                           </div>
                           <Button
                             variant="outline"
                             size="sm"
                             onClick={() => removeSavedStory(story.id)}
-                            className="text-red-600 hover:text-red-700 hover:border-red-300"
+                            className="text-red-600 cursor-pointer hover:text-red-700 hover:border-red-300"
                           >
                             Remove
                           </Button>
@@ -154,7 +171,9 @@ export default function SavedPage() {
                 <p className="text-gray-600 mb-6">
                   Follow journalists to stay updated with their latest stories.
                 </p>
-                <Button onClick={() => router.push("/")}>Continue Reading</Button>
+                <Button onClick={() => router.push("/")}>
+                  Continue Reading
+                </Button>
               </div>
             ) : (
               <div className="space-y-4">
@@ -168,12 +187,19 @@ export default function SavedPage() {
                         <Avatar className="h-12 w-12">
                           <AvatarImage src={journalist.avatar} />
                           <AvatarFallback>
-                            {journalist.name.split(" ").map((n) => n[0]).join("")}
+                            {journalist.name
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")}
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <h3 className="font-semibold text-gray-900">{journalist.name}</h3>
-                          <p className="text-sm text-gray-500">{journalist.title}</p>
+                          <h3 className="font-semibold text-gray-900">
+                            {journalist.name}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {journalist.title}
+                          </p>
                           <p className="text-xs text-gray-400">
                             Followed on {journalist.followedDate}
                           </p>
@@ -183,7 +209,7 @@ export default function SavedPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => removeFollowedJournalist(journalist.id)}
-                        className="text-red-600 hover:text-red-700 hover:border-red-300"
+                        className="text-red-600 hover:text-red-700 cursor-pointer hover:border-red-300"
                       >
                         Unfollow
                       </Button>
@@ -198,3 +224,4 @@ export default function SavedPage() {
     </div>
   );
 }
+

@@ -55,7 +55,7 @@ export default function Header({
             {!isHydrated ? (
               <>
                 <Button
-                  className="rounded-full border-slate-200 border bg-transparent"
+                  className="rounded-full cursor-pointer border-slate-200 border bg-transparent"
                   variant="outline"
                   size="sm"
                   disabled
@@ -64,7 +64,7 @@ export default function Header({
                 </Button>
                 <Button
                   size="sm"
-                  className="bg-[#004FFF] hover:bg-[#003ACC] rounded-full"
+                  className="bg-[#004FFF] hover:bg-[#003ACC] cursor-pointer rounded-full"
                   disabled
                 >
                   Subscribe
@@ -73,7 +73,7 @@ export default function Header({
             ) : user.subscription.isActive ? (
               <>
                 <Button
-                  className="rounded-full bg-transparent"
+                  className="rounded-full cursor-pointer bg-transparent"
                   variant="outline"
                   size="sm"
                   onClick={onSavedClick}
@@ -97,7 +97,7 @@ export default function Header({
             ) : (
               <>
                 <Button
-                  className="rounded-full border-slate-200 border bg-transparent"
+                  className="rounded-full cursor-pointer border-slate-200 border bg-transparent"
                   variant="outline"
                   size="sm"
                   onClick={() => setSubscription(true)}
@@ -106,7 +106,7 @@ export default function Header({
                 </Button>
                 <Button
                   size="sm"
-                  className="bg-[#004FFF] hover:bg-[#003ACC] rounded-full"
+                  className="bg-[#004FFF] cursor-pointer hover:bg-[#003ACC] rounded-full"
                   onClick={onSubscribeClick}
                 >
                   Subscribe
